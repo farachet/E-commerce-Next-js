@@ -4,7 +4,7 @@ import style from './page.module.css'
 import { useRouter} from 'next/navigation'
 import Link from 'next/link'
 import axios from "axios";
-import { Box, Typography, Button, Avatar } from "@mui/material";
+import { Box, Typography, Button, Avatar,Input } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
@@ -17,7 +17,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 
 interface Props{
-    email: string;
+        email: string;
         firstName: string;
         lastName: string;
         password:string;
@@ -49,8 +49,7 @@ const Register: React.FC <Props> = () => {
         console.log("role", role);
         const handleSubmit = () => {
           console.log(email, firstName, lastName, password, birthday, role);
-          axios
-            .post("http://localhost:3001/api/user/signup", {
+          axios.post("http://localhost:3001/api/user/signup", {
               email: email,
               firstName: firstName,
               lastName: lastName,
@@ -71,21 +70,23 @@ const Register: React.FC <Props> = () => {
 
 
   return (
-        <Box>
+        <Box style={{  background: 'linear-gradient(123deg, #984D38 0%, #181E41 63%)' ,
+    
+         }}>
          
-          <Box className={style.boxup}>
+          <Box >
             <Box
               style={{
                 width: 70,
                 height: 150,
-                marginTop: -50,
+                marginTop: -10,
               }}
             >
               <img
-                className="Image8"
+                className={style.Image8}
                 style={{
                   marginLeft: 306,
-                  marginTop: 100,
+                  marginTop: 150,
                   borderRadius: 0,
                   outline: "none",
                   justifyContent: "center",
@@ -101,7 +102,7 @@ const Register: React.FC <Props> = () => {
                 wordWrap: "break-word",
                 fontWeight: "800",
                 marginLeft: 100,
-                marginTop: 480,
+                marginTop: 500,
               }}
             >
               Begin your meta fashion journey here
@@ -160,34 +161,26 @@ const Register: React.FC <Props> = () => {
                 </Link>
               </Box>
               </Box>
-              <Box>
-                <TextField
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                  className="email"
-                  id="standard-start-adornment"
-                  sx={{
-                    m: 1,
-                    width: "47ch",
-                    "& .MuiInputBase-input": {
-                      color: "white",
-                    },
-                    "& .MuiTypography-root .MuiTypography-body1 .css-1pnmrwp-MuiTypography-root":{
-                      color:"white !important",
-                      fontWeight:"bold",
-                      padding:"10px",
-                    }
-                  }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start" style={{ marginLeft: 10,fontWeight:"bold" }}>
-                        Email Address
-                      </InputAdornment>
-                    ),
-                  }}
-                  variant="standard"
-                />
-              </Box>
+ 
+<FormControl 
+        sx={{ m: 1, width: '25ch' }} 
+        variant="standard">
+          <InputLabel 
+          style={{ color: "white" }} 
+          >
+            Email
+            </InputLabel>
+          <Input   
+ value={email}
+ onChange={(e) => setEmail(e.target.value)}
+ id="standard-start-adornment"
+  endAdornment={
+              <InputAdornment 
+              position="start">
+              </InputAdornment>
+            }
+          />
+ </FormControl>
               <Box>
                 <TextField
                   value={firstName}
@@ -209,7 +202,7 @@ const Register: React.FC <Props> = () => {
                   }}
                   variant="standard"
                 />
-    
+  
                 <TextField
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
@@ -231,33 +224,34 @@ const Register: React.FC <Props> = () => {
                   variant="standard"
                 />
               </Box>
-    
-              <FormControl
-                sx={{ m: 1, width: "25ch" }}
-                variant="standard"
-              >
-                <InputLabel style={{ color: "white" }} htmlFor="filled-adornment-password">
-                  Password
-                </InputLabel>
-                <FilledInput
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  id="filled-adornment-password"
-                  type={showPassword ? "text" : "password"}
-                  endAdornment={
-                    <InputAdornment position="end" style={{ marginLeft: 10 }}>
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
+
+        <FormControl 
+        sx={{ m: 1, width: '25ch' }} 
+        variant="standard">
+          <InputLabel 
+          style={{ color: "white" }} 
+          htmlFor="standard-adornment-password">
+            Password
+            </InputLabel>
+          <Input   
+ value={password}
+ onChange={(e) => setPassword(e.target.value)}
+ id="filled-adornment-password"
+ type={showPassword ? "text" : "password"}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+
               <Box>
                 <Typography
                   variant="h5"
@@ -351,6 +345,10 @@ const Register: React.FC <Props> = () => {
                   marginTop: 20,
                 }}
               >
+
+
+
+
                 <Button
                   onClick={handleSubmit}
                   style={{
