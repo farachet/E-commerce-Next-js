@@ -1,5 +1,5 @@
-.boxup
-{position: absolute;
+.boxup{
+position: absolute;
 width: 459px;
 height: 33px;
 left: 810px;
@@ -37,5 +37,4 @@ border-Radius: 10,}
 .MuiTypography-root{
     color: white;
 }
-
 
