@@ -1,0 +1,51 @@
+.Headercontainer{
+    
+    width: 1040px;
+    height: 618px;
+    flex-shrink: 0;
+    position: relative;
+    display: flex !important;
+    flex-direction: column;
+    gap: 100px;
+    
+
+}
+.iconcontainer{
+    background: #6C5DD3;
+    display: flex;
+    width: 49px;
+    height: 49px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: absolute;
+    right: 50px;
+    bottom: 43%;
+}
+.avatarcontainer{
+    position: absolute;
+    bottom: 35%;
+    left: 45%;
+}
+.profileinfo{
+    position: absolute;
+    bottom: -72px;
+    right: -40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.editbtn {
+    width:220px;
+    display: flex;
+    gap:14px;
+    font-weight: bold;
+    bottom: 27%;
+}
+.editbtn:hover{
+    background: #6C5DD3 !important;
+    font-weight: bold;
+    font-family: 'SF Pro Display';
+}
