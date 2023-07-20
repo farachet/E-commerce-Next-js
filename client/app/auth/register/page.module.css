@@ -1,0 +1,41 @@
+.boxup
+{position: absolute;
+width: 459px;
+height: 33px;
+left: 810px;
+top: 340px;}
+
+.Rectangle1914{
+    
+    position: absolute;
+    width: 426px;
+    height: 76px;
+    left: 179px;
+    top: 721px;
+    
+
+}
+.Rectangle1914{
+width: 490;
+height: 600;
+left: 699;
+top: 130;
+position: absolute;
+background: rgba(255, 255, 255, 0.10);
+box-Shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+border-Radius: 10,}
+
+.Image8{
+    background-image: url("../../../public/imags/image\ 8.png");
+    width: 140.52px;
+     height: 477px ;
+     background-repeat: no-repeat;
+}
+.MuiTypography-root .MuiTypography-body1 .css-1pnmrwp-MuiTypography-root{
+    color:aliceblue  !important;
+}
+.MuiTypography-root{
+    color: white;
+}
+
+
