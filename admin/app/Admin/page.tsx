@@ -6,6 +6,7 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import "../Admin/admin.css"
 
 interface Category {
   Collection: { name: string; image: string };
@@ -89,6 +90,7 @@ const Admin: React.FC = () => {
         "http://localhost:3001/api/admin/allcategories"
       );
       const categoriesData: Category[] = response.data; // Make sure the response data matches the Category interface
+console.log(response.data);
 
       setCategories(categoriesData);
 
@@ -114,6 +116,8 @@ const Admin: React.FC = () => {
         }
       );
       const newCategoryData: Category = response.data; // Make sure the response data matches the Category interface
+      console.log('aaaass',response.data);
+      
       const newData: Category = {
         id: newCategoryData.id,
         Collection: {
@@ -143,7 +147,7 @@ const Admin: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="body">
       <Box sx={{ height: 400, width: "50%", marginTop: 5, marginLeft: 40 }}>
         <DataGrid
           className="custom-datagrid"
@@ -243,7 +247,7 @@ const Admin: React.FC = () => {
               textAlign: "center",
             }}
           >
-            <img src="path_to_your_logo_image" alt="Logo" />
+            <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2F99designs.com%2Finspiration%2Flogos%2Flamp&psig=AOvVaw3Pg6yoCeOgEuAEaLSwNU7r&ust=1689949880637000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCPjN74TAnYADFQAAAAAdAAAAABAR" alt="Logo" />
             <Typography variant="h6" color="text.primary">
               Your Text Here
             </Typography>
