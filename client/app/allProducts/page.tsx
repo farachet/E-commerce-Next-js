@@ -4,9 +4,9 @@ import styles from './page.module.css'
 import { useEffect, useState } from 'react'
 import { Box, Typography } from '@mui/material';
 import axios from "axios"
-import Card from '../Components/Card'
-import Filter from "../Components/Filter"
-import ShopCart from '../Components/ShopCart';
+import Card from '../../Components/Card'
+import Filter from "../../Components/Filter"
+import ShopCart from '../../Components/ShopCart';
 export default function Home() {
 
   const [refresh, setRefresh] = useState<boolean>(false);
