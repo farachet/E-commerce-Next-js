@@ -1,7 +1,7 @@
 
 const {client}=require("../database/models/client")
 const {seller}=require("../database/models/seller")
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
 
 

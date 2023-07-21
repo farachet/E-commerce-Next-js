@@ -4,10 +4,19 @@ import { Container,Box, Typography , TextField , Button } from '@mui/material'
 import style from "./page.module.css";
 
 
+type Props ={
+  UpdateProduct : (a:number , b: string , c: number , d : string , e : string , f : string) => void
+  setShow : (a : string) => void
+  Editt : number
+  }
 
 
 
-const Edit  : React.FC = () => {
+const Edit  : React.FC<Props> = ({UpdateProduct , setShow ,  Editt }) => {
+  console.log( "edit " , Editt)
+  console.log( "updateP " , UpdateProduct)
+
+
 
     const [productname, setProductname] = useState<string>("");
     const [price, setPrice] = useState<string>("");
@@ -75,10 +84,18 @@ const Edit  : React.FC = () => {
            />
 
 <Button
-onClick={() => {}}
+
+onClick={() => {
+  alert("hello")
+  UpdateProduct( Editt , productname  , parseInt (price)  , reference , image , status )
+    setShow('AddProducts')
+    
+  }}
+
  variant="contained"
   style={{width : "20%"}}
-  >Edit</Button>
+  >
+    Edit</Button>
        
                 </Box>
         </Box>
