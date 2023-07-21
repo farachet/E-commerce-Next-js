@@ -1,1 +1,11 @@
-.hhh{background-color: red;}
+body {
+    width: 100%;
+    height: 900px;
+    background: linear-gradient(113.49deg, #984D38 -30.3%, #181E41 58.12%) ;
+}
+.Image8{
+    background-image: url("../../../public/imags/image\ 8.png");
+    width: 140.52px;
+     height: 477px ;
+     background-repeat: no-repeat;
+}
