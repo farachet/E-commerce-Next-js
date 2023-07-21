@@ -15,14 +15,10 @@ interface Product {
   status : string ;
 }
 
-
-
-
-
-
-const Products = () => {
+const Products: React.FC = ()  =>  {
 
     const [data, setData] = useState<Product[]>([]);
+    const [show, setShow] = useState<boolean>(false);
 
     useEffect(() => {
         fetch();
@@ -40,9 +36,21 @@ const Products = () => {
           })
       }
 
+      const deleteProduct = (id : number) => {
+axios.delete(`http://localhost:3001/api/product/deleteByid/${id}`)
+.then(() => {
+  fetch()
+})
+.catch((err) => {
+  console.log(err)
+})
+  }
+
+
+
 
   return (
-    <Box style={{ background: 'linear-gradient(123deg, #984D38 0%, #181E41 63%)' }}>
+    <Box className={style.parent} >
     {data.map((el) => (
       <Box
         key={el.id} 
@@ -55,6 +63,7 @@ const Products = () => {
           flexDirection: 'column',
           alignItems: 'center',
           gap: '16px',
+          marginLeft : 20
         }}
       >
         <Avatar
@@ -87,11 +96,12 @@ const Products = () => {
             <EditIcon />
           </IconButton>
           <IconButton aria-label="delete">
-            <DeleteIcon />
+            <DeleteIcon onClick={() => {deleteProduct(el.id)}}/>
           </IconButton>
         </Box>
       </Box>
     ))}
+    
   </Box>
  
 
