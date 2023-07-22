@@ -13,12 +13,15 @@ interface Product {
   reference : string;
   image : string ;
   status : string ;
+  
 }
 
 
 
 
-const AddProducts : React.FC = ()  =>  {
+
+
+const AddProducts : React.FC= ()  =>  {
 
 
   const [productname, setProductname] = useState("");

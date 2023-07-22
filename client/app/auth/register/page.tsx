@@ -6,10 +6,10 @@ import Link from 'next/link'
 import axios from "axios";
 import { Box, Typography, Button, Avatar,Input } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import FormControl from "@mui/material/FormControl";
 import IconButton from "@mui/material/IconButton";
 import FilledInput from "@mui/material/FilledInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -24,7 +24,7 @@ interface Props{
         birthday: string;
         role: string;
 }
-const Register: React.FC <Props> = () => {
+  const Register: React.FC <Props> = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -32,24 +32,23 @@ const Register: React.FC <Props> = () => {
   const [birthday, setBirthday] = useState("");
   const [role, setRole] = useState("");
   
-  const [showPassword, setShowPassword] = useState(false);
   
-  
-  const router = useRouter()
-        const handleClickShowPassword = () => setShowPassword((show) => !show);
-        const handleMouseDownPassword = (event:any) => {
+   const router = useRouter()
+
+   
+   const [showPassword, setShowPassword] = useState(false)
+   const handleClickShowPassword = () => setShowPassword((show) => !show);
+   const handleMouseDownPassword = (event:any) => {
           event.preventDefault();
         };
         
-        const handleChangeRole = (event:any) => {
-     
-        
-          setRole(event.target.value);
+   const handleChangeRole = (event:any) => {
+     setRole(event.target.value);
         };
         console.log("role", role);
         const handleSubmit = () => {
           console.log(email, firstName, lastName, password, birthday, role);
-          axios.post("http://localhost:3001/api/user/signup", {
+          axios.post('http://localhost:3001/api/user/signup', {
               email: email,
               firstName: firstName,
               lastName: lastName,
@@ -73,7 +72,6 @@ const Register: React.FC <Props> = () => {
         <Box style={{  background: 'linear-gradient(123deg, #984D38 0%, #181E41 63%)' ,
     
          }}>
-         
           <Box >
             <Box
               style={{
@@ -86,7 +84,7 @@ const Register: React.FC <Props> = () => {
                 className={style.Image8}
                 style={{
                   marginLeft: 306,
-                  marginTop: 150,
+                  marginTop: 115,
                   borderRadius: 0,
                   outline: "none",
                   justifyContent: "center",
@@ -101,8 +99,8 @@ const Register: React.FC <Props> = () => {
                 letterSpacing: 0.30,
                 wordWrap: "break-word",
                 fontWeight: "800",
-                marginLeft: 100,
-                marginTop: 500,
+                marginLeft: 120,
+                marginTop: 450,
               }}
             >
               Begin your meta fashion journey here
@@ -112,7 +110,7 @@ const Register: React.FC <Props> = () => {
         
           style={{
             width: 490,
-            height: 600,
+            height: 700,
             left: 699,
             top: 130,
             position: "absolute",
@@ -121,112 +119,123 @@ const Register: React.FC <Props> = () => {
             borderRadius: 10,
           }}
         >
-            <Box>
-              <Box>
-                <Typography
-                  variant="h1"
-                  component="h2"
-                  style={{
-                    color: "white",
-                    fontSize: 30,
-                    fontFamily: "SF Pro Display",
-                    letterSpacing: 0.30,
-                    wordWrap: "break-word",
-                    fontWeight: "800",
-                    marginLeft: 35,
-                    marginTop: 20,
-                  }}
-                >
-                  Sign Up
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  marginTop: "20px",
-                  marginLeft: "40px",
-                  color: "white",
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                Already have an account?{" "}
-                <Link href="/signin">
-                  <Typography
-                    sx={{ color: "RGB(8, 60, 194)", textDecoration: "none", fontSize: "20px" }}
-                  >
-                    Login
-                  </Typography>
-                </Link>
-              </Box>
-              </Box>
- 
-<FormControl 
-        sx={{ m: 1, width: '25ch' }} 
+          
+<Typography 
+variant="h1" component="h2" 
+style={{
+     color : "white" ,
+      fontSize: 30 ,
+       fontFamily: 'SF Pro Display' ,
+        letterSpacing: 0.30 ,
+         wordWrap: 'break-word' ,
+          fontWeight: '800' ,
+           marginLeft : 35 ,
+            marginTop : 20
+            }}
+            >
+     Sign up
+    </Typography>
+    <Box>
+    <Typography variant="h1" component="h5"
+     style={{ 
+        color : "white" ,
+         fontSize: 15 ,
+          fontFamily: 'SF Pro Display' ,
+           letterSpacing: 0.30 ,
+            wordWrap: 'break-word'  ,
+             marginLeft : 35 ,
+              marginTop: 50
+              }}>
+     Already a Member ?
+     <Link href="/auth/login"></Link>
+    </Typography>
+    <Link href="/auth/login"><Typography variant="h1" component="h5" 
+    style={{ 
+      fontSize: 18 ,
+       fontFamily: 'SF Pro Display' ,
+        letterSpacing: 0.36 ,
+         wordWrap: 'break-word'  ,
+          marginLeft : 180 ,
+           marginTop: -20,  color: '#6C5DD3',
+     fontWeight: '500',
+     }}
+     >
+    Sign in
+    </Typography>
+    </Link>
+    </Box>
+
+
+     <FormControl 
+        sx={{ m: 1, width: '46.5ch' }} 
         variant="standard">
           <InputLabel 
           style={{ color: "white" }} 
           >
-            Email
+            Email Adress
             </InputLabel>
           <Input   
- value={email}
- onChange={(e) => setEmail(e.target.value)}
- id="standard-start-adornment"
-  endAdornment={
+          style={{color:'white'}}
+           value={email}
+           onChange={(e) => setEmail(e.target.value)}
+           id="standard-start-adornment"
+            endAdornment={
               <InputAdornment 
               position="start">
               </InputAdornment>
             }
           />
- </FormControl>
+          </FormControl>
               <Box>
-                <TextField
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  id="standard-start-adornment"
-                  sx={{
-                    m: 1,
-                    width: "21ch",
-                    "& .MuiInputBase-input": {
-                      color: "white",
-                    },
-                  }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start" style={{ marginLeft: 10 }}>
-                        Full Name
-                      </InputAdornment>
-                    ),
-                  }}
-                  variant="standard"
-                />
+              <TextField
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            id="standard-start-adornment"
+           sx={{
+           m: 1,
+          width: "21ch",
+          "& .MuiInputBase-input": {
+          color: "white",
+           },
+  }}
+  InputProps={{
+    startAdornment: (
+      <InputAdornment position="start" 
+      style={{ 
+        marginLeft: 10,
+       color: 'white' 
+       }}>
+        <span style={{ color: 'white' }}>Full Name</span>
+      </InputAdornment>
+    ),
+  }}
+  variant="standard"
+/>
   
-                <TextField
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  id="standard-start-adornment"
-                  sx={{
-                    m: 1,
-                    width: "24ch",
-                    "& .MuiInputBase-input": {
-                      color: "white",
-                    },
-                  }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start" style={{ marginLeft: 10 }}>
-                        Last Name
-                      </InputAdornment>
-                    ),
-                  }}
-                  variant="standard"
-                />
+<TextField
+  value={lastName}
+  onChange={(e) => setLastName(e.target.value)}
+  id="standard-start-adornment"
+  sx={{
+    m: 1,
+    width: "21ch",
+    "& .MuiInputBase-input": {
+      color: "white",
+    },
+  }}
+  InputProps={{
+    startAdornment: (
+      <InputAdornment position="start" style={{ marginLeft: 10, color: 'white' }}>
+        <span style={{ color: 'white' }}>Last Name</span>
+      </InputAdornment>
+    ),
+  }}
+  variant="standard"
+/>
               </Box>
 
         <FormControl 
-        sx={{ m: 1, width: '25ch' }} 
+        sx={{ m: 1, width: '46.5ch' }} 
         variant="standard">
           <InputLabel 
           style={{ color: "white" }} 
@@ -234,6 +243,7 @@ const Register: React.FC <Props> = () => {
             Password
             </InputLabel>
           <Input   
+             style={{color:'white'}}
  value={password}
  onChange={(e) => setPassword(e.target.value)}
  id="filled-adornment-password"
@@ -282,9 +292,14 @@ const Register: React.FC <Props> = () => {
                   }}
                   InputProps={{
                     startAdornment: (
-                      <InputAdornment position="start" style={{ marginLeft: 10 }}>
-                        YYYY-MM-DD
-                      </InputAdornment>
+                     
+                  <InputAdornment position="start" 
+                  style={{ marginLeft: 10,
+                   color: 'white' }}
+                   >
+                  <span style={{ color: 'white' }}> YYYY-MM-DD</span>
+                  </InputAdornment>
+
                     ),
                   }}
                   variant="standard"
@@ -346,11 +361,8 @@ const Register: React.FC <Props> = () => {
                 }}
               >
 
-
-
-
                 <Button
-                  onClick={handleSubmit}
+                  onClick={ () => {handleSubmit()}}
                   style={{
                     color: "white",
                     fontSize: 15,

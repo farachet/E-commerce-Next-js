@@ -4,7 +4,7 @@ import style from "./page.module.css"
 import { Box, Button,  Avatar , IconButton , Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete'
-import axios, { AxiosResponse } from 'axios';
+import axios  from 'axios';
 
 interface Product {
   id: number;
@@ -15,10 +15,15 @@ interface Product {
   status : string ;
 }
 
-const Products: React.FC = ()  =>  {
+type Props = {
+setShow : (a:string) => void
+HandleEdit : (a:number) => void
+
+}
+const Products: React.FC<Props>= ({setShow , HandleEdit})  =>  {
 
     const [data, setData] = useState<Product[]>([]);
-    const [show, setShow] = useState<boolean>(false);
+    
 
     useEffect(() => {
         fetch();
@@ -93,7 +98,13 @@ axios.delete(`http://localhost:3001/api/product/deleteByid/${id}`)
           <Typography>{el.price}</Typography>
 
           <IconButton aria-label="edit">
-            <EditIcon />
+            <EditIcon  onClick={()=> {
+              setShow("")
+              HandleEdit(el.id)
+              console.log(el.id)
+
+              
+              }} />
           </IconButton>
           <IconButton aria-label="delete">
             <DeleteIcon onClick={() => {deleteProduct(el.id)}}/>
