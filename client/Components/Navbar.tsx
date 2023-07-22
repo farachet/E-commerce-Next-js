@@ -105,9 +105,6 @@ function Navbar() {
                 <Avatar className="Avatar" src=""
                 sx={{display: "inline-block"}}/>
         
-            
-                <Avatar className="Avatar" src="g"
-                sx={{display: "inline-block"}}/>
 
             </Box>
                 

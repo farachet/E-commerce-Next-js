@@ -31,7 +31,7 @@ const Products: React.FC<Props>= ({setShow , HandleEdit})  =>  {
 
     const fetch = () => {
         axios
-        .get(`http://localhost:3001/api/product/getAll/1`)
+        .get(`http://localhost:3001/api/product/getAll/2`)
           .then((res) => {
             console.log(res.data)
             setData(res.data)

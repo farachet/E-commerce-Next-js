@@ -10,6 +10,8 @@ import "../Category/admin.css"
 import ResponsiveDrawer from "../page";
 
 
+
+
 interface Category {
   Collection: { name: string; image: string };
   id: number;
@@ -150,11 +152,13 @@ console.log(response.data);
 
   return (
     <div className="body">
+
 <ResponsiveDrawer Collection={{
         name: "",
         image: ""
       }} id={0} categoryname={""} image={""} Stock={0}/>
 <div style={{width:50,color:"blue",fontSize:40,fontWeight:'bold',marginLeft:700}}> List Categories</div>
+
       <Box sx={{ height: 400, width: "50%", marginTop: 5, marginLeft: 40 ,backgroundColor:'grey'}}>
   
         <DataGrid

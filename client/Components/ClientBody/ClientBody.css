@@ -1,0 +1,9 @@
+.body-user-container{
+    display: flex !important;
+    gap: 20px;
+    
+}
+.user-post-info{
+    display: flex !important;
+    gap: 20px;
+}

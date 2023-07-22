@@ -4,7 +4,9 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import axios from 'axios';
 import { Button } from '@mui/material';
 import styles from '../Requests/style.module.css';
+
 import ResponsiveDrawer from '../page';
+
 
 interface ClientData {
   id: number;
@@ -94,7 +96,9 @@ const ManageClient: React.FC = () => {
         />
       </div>
     </div>
+
     </div>
+
   );
 };
 

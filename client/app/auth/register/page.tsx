@@ -57,7 +57,7 @@ interface Props{
               role: role, 
             })
             .then((res: any) => {
-                router.push("/signin");
+                console.log(res)
             })
             .catch((error :any) => {
               console.log(error);
