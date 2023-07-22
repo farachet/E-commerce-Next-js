@@ -72,7 +72,6 @@ interface Props{
         <Box style={{  background: 'linear-gradient(123deg, #984D38 0%, #181E41 63%)' ,
     
          }}>
-         
           <Box >
             <Box
               style={{
@@ -120,112 +119,123 @@ interface Props{
             borderRadius: 10,
           }}
         >
-            <Box>
-              <Box>
-                <Typography
-                  variant="h1"
-                  component="h2"
-                  style={{
-                    color: "white",
-                    fontSize: 30,
-                    fontFamily: "SF Pro Display",
-                    letterSpacing: 0.30,
-                    wordWrap: "break-word",
-                    fontWeight: "800",
-                    marginLeft: 35,
-                    marginTop: 20,
-                  }}
-                >
-                  Sign Up
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  marginTop: "20px",
-                  marginLeft: "40px",
-                  color: "white",
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                Already have an account?{" "}
-                <Link href="/signin">
-                  <Typography
-                    sx={{ color: "RGB(8, 60, 194)", textDecoration: "none", fontSize: "20px" }}
-                  >
-                    Login
-                  </Typography>
-                </Link>
-              </Box>
-              </Box>
- 
-<FormControl 
-        sx={{ m: 1, width: '25ch' }} 
+          
+<Typography 
+variant="h1" component="h2" 
+style={{
+     color : "white" ,
+      fontSize: 30 ,
+       fontFamily: 'SF Pro Display' ,
+        letterSpacing: 0.30 ,
+         wordWrap: 'break-word' ,
+          fontWeight: '800' ,
+           marginLeft : 35 ,
+            marginTop : 20
+            }}
+            >
+     Sign up
+    </Typography>
+    <Box>
+    <Typography variant="h1" component="h5"
+     style={{ 
+        color : "white" ,
+         fontSize: 15 ,
+          fontFamily: 'SF Pro Display' ,
+           letterSpacing: 0.30 ,
+            wordWrap: 'break-word'  ,
+             marginLeft : 35 ,
+              marginTop: 50
+              }}>
+     Already a Member ?
+     <Link href="/auth/login"></Link>
+    </Typography>
+    <Link href="/auth/login"><Typography variant="h1" component="h5" 
+    style={{ 
+      fontSize: 18 ,
+       fontFamily: 'SF Pro Display' ,
+        letterSpacing: 0.36 ,
+         wordWrap: 'break-word'  ,
+          marginLeft : 180 ,
+           marginTop: -20,  color: '#6C5DD3',
+     fontWeight: '500',
+     }}
+     >
+    Sign in
+    </Typography>
+    </Link>
+    </Box>
+
+
+     <FormControl 
+        sx={{ m: 1, width: '46.5ch' }} 
         variant="standard">
           <InputLabel 
           style={{ color: "white" }} 
           >
-            Email
+            Email Adress
             </InputLabel>
           <Input   
- value={email}
- onChange={(e) => setEmail(e.target.value)}
- id="standard-start-adornment"
-  endAdornment={
+          style={{color:'white'}}
+           value={email}
+           onChange={(e) => setEmail(e.target.value)}
+           id="standard-start-adornment"
+            endAdornment={
               <InputAdornment 
               position="start">
               </InputAdornment>
             }
           />
- </FormControl>
+          </FormControl>
               <Box>
-                <TextField
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  id="standard-start-adornment"
-                  sx={{
-                    m: 1,
-                    width: "21ch",
-                    "& .MuiInputBase-input": {
-                      color: "white",
-                    },
-                  }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start" style={{ marginLeft: 10 }}>
-                        Full Name
-                      </InputAdornment>
-                    ),
-                  }}
-                  variant="standard"
-                />
+              <TextField
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            id="standard-start-adornment"
+           sx={{
+           m: 1,
+          width: "21ch",
+          "& .MuiInputBase-input": {
+          color: "white",
+           },
+  }}
+  InputProps={{
+    startAdornment: (
+      <InputAdornment position="start" 
+      style={{ 
+        marginLeft: 10,
+       color: 'white' 
+       }}>
+        <span style={{ color: 'white' }}>Full Name</span>
+      </InputAdornment>
+    ),
+  }}
+  variant="standard"
+/>
   
-                <TextField
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  id="standard-start-adornment"
-                  sx={{
-                    m: 1,
-                    width: "24ch",
-                    "& .MuiInputBase-input": {
-                      color: "white",
-                    },
-                  }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start" style={{ marginLeft: 10 }}>
-                        Last Name
-                      </InputAdornment>
-                    ),
-                  }}
-                  variant="standard"
-                />
+<TextField
+  value={lastName}
+  onChange={(e) => setLastName(e.target.value)}
+  id="standard-start-adornment"
+  sx={{
+    m: 1,
+    width: "21ch",
+    "& .MuiInputBase-input": {
+      color: "white",
+    },
+  }}
+  InputProps={{
+    startAdornment: (
+      <InputAdornment position="start" style={{ marginLeft: 10, color: 'white' }}>
+        <span style={{ color: 'white' }}>Last Name</span>
+      </InputAdornment>
+    ),
+  }}
+  variant="standard"
+/>
               </Box>
 
         <FormControl 
-        sx={{ m: 1, width: '25ch' }} 
+        sx={{ m: 1, width: '46.5ch' }} 
         variant="standard">
           <InputLabel 
           style={{ color: "white" }} 
@@ -233,6 +243,7 @@ interface Props{
             Password
             </InputLabel>
           <Input   
+             style={{color:'white'}}
  value={password}
  onChange={(e) => setPassword(e.target.value)}
  id="filled-adornment-password"
@@ -281,9 +292,14 @@ interface Props{
                   }}
                   InputProps={{
                     startAdornment: (
-                      <InputAdornment position="start" style={{ marginLeft: 10 }}>
-                        YYYY-MM-DD
-                      </InputAdornment>
+                     
+                  <InputAdornment position="start" 
+                  style={{ marginLeft: 10,
+                   color: 'white' }}
+                   >
+                  <span style={{ color: 'white' }}> YYYY-MM-DD</span>
+                  </InputAdornment>
+
                     ),
                   }}
                   variant="standard"
@@ -344,9 +360,6 @@ interface Props{
                   marginTop: 20,
                 }}
               >
-
-
-
 
                 <Button
                   onClick={ () => {handleSubmit()}}
