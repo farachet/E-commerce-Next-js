@@ -1,0 +1,110 @@
+.header {
+    background: linear-gradient(113.49deg, #984D38 -30.3%, #181E41 58.12%);
+    justify-content: space-evenly;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 70px;
+   
+   
+  }
+  
+  .header .logo {
+    display: inline-block;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+    color: #6C5DD3;
+    margin-right: 20px;
+  }
+  
+  .header .navigation {
+    display: flex;
+    align-items: center;
+    flex-grow: 1
+    
+  }
+  
+  .header .Home,
+  .header .personal-collection,
+  .header .drops,
+  .header .more,
+  .header .explore {
+    font-family: 'SF Pro Display';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+    margin-right: 20px;
+  }
+  
+  .header .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .header .search-items {
+    border: none;
+    font-family: 'SF Pro Display';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.03em;
+    background-color: transparent;
+    width: 318px;
+    height: 35px;
+    border: 0.5px solid rgb(185, 133, 133);
+    border-radius: 184px;
+    margin-right: 20px;
+  }
+  
+  
+  .header .wallet,
+  .header .SecretRare {
+    display: flex;
+    
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14.61px;
+    font-family: 'Poppins';
+    font-weight: 500;
+    word-wrap: break-word;
+    margin-right: 20px;
+   
+  }
+  .iconMes {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    
+  }
+  .icondel{
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+   
+  }
+  .header .frame-48095481 {
+    display: flex;
+    gap: 10px;
+    margin-right: 20px;
+  }
+  
+  .header .Avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+   
+  }
+  
+  .header .search-icon {
+    color: #ffffff;
+    margin-right: 20px;
+  }
+  
