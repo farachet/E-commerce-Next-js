@@ -24,6 +24,7 @@ const ClientImages: React.FC<Props> = ({ posts }) => {
     setOpen(false);
   };
 
+
   return (
     <Container>
       <Box
@@ -44,28 +45,56 @@ const ClientImages: React.FC<Props> = ({ posts }) => {
           See All Photos
         </Typography>
         <div>
-          <Dialog open={open} onClose={handleClose} fullWidth
-          sx={{
-            "& .MuiDialog-container": {
-              "& .MuiPaper-root": {
-                width: "100%",
-                maxWidth: "500px!important"
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            fullWidth
+            sx={{
+              "& .MuiDialog-container": {
+                "& .MuiPaper-root": {
+                  width: "100%",
+                  maxWidth: "500px!important",
+                },
               },
-            },
-          }}>
-            <DialogTitle>allPictures</DialogTitle>
-            <DialogContent > helloo</DialogContent>
+            }}
+          >
+            <DialogTitle sx={{textAlign:"center",fontWeight:"bold"}}>ALL Photos</DialogTitle>
+            <DialogContent>
+              <Box
+                sx={{
+                  diplay: "flex",
+                  flexDirection: "column",
+                  gap: "30px",
+                }}
+              >
+                {posts.map((ele) => (
+                  <Avatar
+                    key={ele.id}
+                    src={ele.image}
+                    alt="img"
+                    sx={{
+                      width: "100%",
+                      height: "300px",
+                      borderRadius: "5px",
+                      marginBottom: "30px",
+                    }}
+                  />
+                ))}
+              </Box>
+            </DialogContent>
           </Dialog>
         </div>
       </Box>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-        {posts.map((ele) => (
+        {posts.slice(0,9).map((ele) => (
           <Avatar
+            key={ele.id}
             src={ele.image}
             alt="img"
             sx={{ width: "105px", height: "91px", borderRadius: "5px" }}
           />
         ))}
+    
       </Box>
     </Container>
   );

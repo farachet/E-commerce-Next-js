@@ -49,12 +49,15 @@ const Login: React.FC <Props> = () => {
       password:password,
       role:role
       }).then(res=>{
-        console.log("welcome",res.data)
+        
+        console.log("welcome",res.data.existUser.role)
         localStorage.setItem("token",res.data.acsessToken)
+        localStorage.setItem("role",res.data.existUser.role)
     
         if(res.data.acsessToken){
           // handleUser(res.data.existUser)
-          router.push("/home")
+          router.push("/Home")
+         console.log(res.data)
         }else{
           console.log("home")
            alert("invalid username or password")
@@ -154,7 +157,7 @@ style={{
               }}>
      New user ?
     </Typography>
-    <Link href="/"><Typography variant="h1" component="h5" 
+    <Link href="/auth/register"><Typography variant="h1" component="h5" 
     style={{ 
       fontSize: 18 ,
        fontFamily: 'SF Pro Display' ,
@@ -277,7 +280,7 @@ style={{
                          marginTop : 20
                          }}
                          >
-            <Button onClick={()=>handleSubmit()}
+            <Button type='button' onClick={()=>handleSubmit()}
              style={{
               color: 'white',
                fontSize: 15,

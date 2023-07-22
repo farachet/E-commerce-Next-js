@@ -1,11 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ClientHeader from "../../Components/ClientHeader/ClientHeader";
 import ClientBody from "../../Components/ClientBody/ClientBody";
 import axios from "axios";
 import { Container } from "@mui/material";
-
+import { ecommerceContext } from "../Context/ecommerce";
 const Client = () => {
+  const {user}=useContext(ecommerceContext)
   const [posts, setPost] = useState<Posts[]>([]);
   const [refresh, setRefresh] = useState<boolean>(false);
   const [user, setUser] = useState<any>({});

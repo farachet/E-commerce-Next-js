@@ -31,6 +31,7 @@ const ClientPosts: React.FC<Props> = ({ posts, deletePost }) => {
     <div>
       {posts.map((ele) => (
         <Container
+        key={ele.id}
           sx={{
             marginBottom: "20px",
           }}

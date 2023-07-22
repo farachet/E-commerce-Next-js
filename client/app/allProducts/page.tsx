@@ -31,7 +31,7 @@ useEffect(() => {
       
     })
     .catch(err=>console.error("err"))
-    axios.get<Products[]>(`http://localhost:3001/api/cards/getAll/${21}`)
+    axios.get<Products[]>(`http://localhost:3001/api/cards/getAll/${28}`)
     .then((res)=>{
        
         setCartItems(res.data)
@@ -47,7 +47,7 @@ useEffect(() => {
   //   return null;
   // }
   const addToCart=(productId:number):void=> {
-    axios.post(`http://localhost:3001/api/cards/add/${21}`,{productId})
+    axios.post(`http://localhost:3001/api/cards/add/${28}`,{productId})
     .then(res=>{
       setRefresh(!refresh)
       openCart()
@@ -94,6 +94,14 @@ useEffect(() => {
         console.log(err)
     })
   
+  }
+  const addToCollection=(data:any)=>{
+    console.log("hey",data)
+    axios.post(`http://localhost:3001/api/posts/createPost/${28}`,data)
+    .then((res)=>{
+      console.log("sent" )
+    })
+    .catch(err=>console.log(err))
   }
   return (
     <Box className='allProducts-container' style={{
@@ -162,9 +170,9 @@ useEffect(() => {
                         }}>
                             
                             {products &&products.length!==0?
-                              products.map(item=><Card  addToCart={addToCart} key={item.id} item={item}/>):""
+                              products.map(item=><Card   addToCollection={addToCollection} addToCart={addToCart} key={item.id} item={item}/>):""
                             }
-                            {/* <Cart addToCart={addToCart} addToCollection={addToCollection} product={product} key={product.id}/> */}
+                          
                         </Box>
                   </Box>
                 </Box>

@@ -1,8 +1,29 @@
-import React from 'react' ; 
+"use client"
+import React,{useEffect,useContext} from 'react' ; 
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import { Box, Typography, Avatar, Button } from "@mui/material"
+import axios from 'axios';
+import { ecommerceContext } from '../Context/ecommerce';
 
 const Home: React.FC = () => {
+  const {user,handleUser}=useContext(ecommerceContext)
+  useEffect(()=>{
+    
+  console.log("useEffect")
+    const token=localStorage.getItem("token")
+    axios.post(`http://localhost:3001/api/user`,{"token":token})
+    .then(res=>{
+      console.log("hommme",res.data)
+      if(res.data.user){
+       console.log(res.data.user)
+       handleUser(res.data.user)
+      
+      }
+     })
+    
+    .catch(err=>console.log("errrr",err))
+  },[])
+
   return <Box >
     <Box>
       <Box style={{ width: "100%", height: "100%", position: "relative" }}>

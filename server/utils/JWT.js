@@ -2,6 +2,7 @@ const {verify}=require("jsonwebtoken")
 const validateToken=(req,res,next)=>{
     
     const accessToken=req.body.token
+
     console.log(accessToken)
 
     if(!accessToken){
@@ -13,6 +14,7 @@ const validateToken=(req,res,next)=>{
                 }else{
                      req.role=d.role
                      req.email=d.email
+                     
                      next()
                 }
             })

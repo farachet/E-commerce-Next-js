@@ -30,7 +30,7 @@ const AddProducts : React.FC= ()  =>  {
   const [image, setImage] = useState("");
   const [status, setStatus] = useState("");
   const [approved, setApproved] = useState(0);
-  const [sellerId, setSellerId] = useState(1);
+  const [sellerId, setSellerId] = useState(2);
 
   
   const AddProduct = () => {

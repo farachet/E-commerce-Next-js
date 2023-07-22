@@ -20,7 +20,7 @@ const ClientHeader: React.FC<Props> = ({ user, handleRefresh }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [prictureOpen, setPictureOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
- 
+  const [updatedCover,setCover]=useState<boolean>(false)
   const [profileData, setProfileData] = useState<Edit>({
     firstName: "",
     lastName: "",
@@ -105,6 +105,14 @@ const ClientHeader: React.FC<Props> = ({ user, handleRefresh }) => {
       [name]: value,
     }));
   };
+  const handleCover=()=>{
+    axios
+    .put<User>(`http://localhost:3001/api/client/edit/${user.id}`, {
+      cover: imageUrl,
+    })
+    .then((res) => handleRefresh())
+    .catch((err) => console.error(err));
+  }
   return (
     <Container className="Header-container">
       <Box>
@@ -118,7 +126,10 @@ const ClientHeader: React.FC<Props> = ({ user, handleRefresh }) => {
             height: 375,
           }}
         />
-        <Box className="icon-container">
+        <Box onClick={()=>{
+          setCover(true)
+          handleOpenn()
+        }} className="icon-container">
           <ModeEditOutlineIcon style={{ color: "white" }} />
         </Box>
         <Box

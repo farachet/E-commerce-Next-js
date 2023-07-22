@@ -6,9 +6,10 @@ import "./Card.css";
 type Props = {
   item: Products;
   addToCart: (val: number) => void;
+  addToCollection:(data:any)=>void
 };
 
-const Card: React.FC<Props> = ({ item, addToCart }) => {
+const Card: React.FC<Props> = ({ item, addToCart,addToCollection }) => {
   if (!item.productname) {
     return null;
   }
@@ -85,8 +86,8 @@ const Card: React.FC<Props> = ({ item, addToCart }) => {
       >
         <FavoriteIcon
           onClick={
-            // ()=>addToCollection({content:product.productname,image:product.image})
-            () => console.log("hi")
+            ()=>addToCollection({content:item.productname,image:item.image})
+            
           }
           sx={{ color: "red", fontSize: "30px", cursor: "pointer" }}
         />
