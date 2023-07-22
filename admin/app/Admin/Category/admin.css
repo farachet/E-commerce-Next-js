@@ -1,0 +1,28 @@
+/*.MuiDataGrid-root .MuiDataGrid-row .MuiDataGrid-cell,
+.MuiDataGrid-root .MuiDataGrid-columnHeader,
+.MuiDataGrid-root .MuiDataGrid-columnHeader:focus,
+.MuiDataGrid-root .MuiDataGrid-columnHeader:hover,
+.MuiDataGrid-root .MuiDataGrid-columnHeader:focus-within,
+.MuiDataGrid-root .MuiDataGrid-cell--header .MuiDataGrid-value {
+  color: white;
+}*/
+.custom-datagrid {
+    background-color: white;
+  }
+  
+  .custom-datagrid .MuiDataGrid-cell {
+    color: black;
+  }
+  
+  body{
+    color: white;
+  }
+  .footer{
+    color: white;
+  }
+  .body {
+    background: linear-gradient(113.49deg, #984D38 -30.3%, #181E41 58.12%);
+    
+  }  
+
+ 

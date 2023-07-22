@@ -1,14 +1,30 @@
-import React from 'react'
-import { Container,Box, Typography } from '@mui/material'
+import * as React from 'react'
+import { Container,Box, Typography , TextField} from '@mui/material'
 import Avatar from '@mui/material/Avatar';
 import style from "./page.module.css"
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
-type Props = {}
 
-const Profil = (props: Props) => {
+
+const Profil = () => {
+
+  const [open, setOpen] = React.useState(false)
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
+
   return (
    <Box   >
     <Container 
@@ -83,8 +99,38 @@ const Profil = (props: Props) => {
 
                 
 
-              }}> <ModeEditOutlineIcon/> Edit Profile </Button>  
+              }}>
+                
+               <ModeEditOutlineIcon onClick={handleClickOpen} /> Edit Profile </Button>  
               </Box>
+
+              <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Edit Profil</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="First name"
+            type="name"
+            fullWidth
+            variant="standard"
+          />
+               <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Last name"
+            type="name"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>Edit</Button>
+        </DialogActions>
+      </Dialog>
               <Box>
                 <Typography 
                 variant='body1'

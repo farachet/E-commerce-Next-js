@@ -1,6 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Navbar from './Navbar/Navbar'
+import ResponsiveDrawer from './Admin/page'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,7 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-       
+       <ResponsiveDrawer Collection={{
+          name: '',
+          image: ''
+        }} id={0} categoryname={''} image={''} Stock={0}/>
         {children}</body>
     </html>
   )

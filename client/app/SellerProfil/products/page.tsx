@@ -4,7 +4,7 @@ import style from "./page.module.css"
 import { Box, Button,  Avatar , IconButton , Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete'
-import axios, { AxiosResponse } from 'axios';
+import axios  from 'axios';
 
 interface Product {
   id: number;
@@ -15,14 +15,15 @@ interface Product {
   status : string ;
 }
 
+type Props = {
+setShow : (a:string) => void
+HandleEdit : (a:number) => void
 
-
-
-
-
-const Products = () => {
+}
+const Products: React.FC<Props>= ({setShow , HandleEdit})  =>  {
 
     const [data, setData] = useState<Product[]>([]);
+    
 
     useEffect(() => {
         fetch();
@@ -40,9 +41,21 @@ const Products = () => {
           })
       }
 
+      const deleteProduct = (id : number) => {
+axios.delete(`http://localhost:3001/api/product/deleteByid/${id}`)
+.then(() => {
+  fetch()
+})
+.catch((err) => {
+  console.log(err)
+})
+  }
+
+
+
 
   return (
-    <Box style={{ background: 'linear-gradient(123deg, #984D38 0%, #181E41 63%)' }}>
+    <Box className={style.parent} >
     {data.map((el) => (
       <Box
         key={el.id} 
@@ -55,6 +68,7 @@ const Products = () => {
           flexDirection: 'column',
           alignItems: 'center',
           gap: '16px',
+          marginLeft : 20
         }}
       >
         <Avatar
@@ -84,14 +98,21 @@ const Products = () => {
           <Typography>{el.price}</Typography>
 
           <IconButton aria-label="edit">
-            <EditIcon />
+            <EditIcon  onClick={()=> {
+              setShow("")
+              HandleEdit(el.id)
+              console.log(el.id)
+
+              
+              }} />
           </IconButton>
           <IconButton aria-label="delete">
-            <DeleteIcon />
+            <DeleteIcon onClick={() => {deleteProduct(el.id)}}/>
           </IconButton>
         </Box>
       </Box>
     ))}
+    
   </Box>
  
 
