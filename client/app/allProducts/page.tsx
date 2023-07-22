@@ -1,10 +1,10 @@
 'use client'
 import Image from 'next/image'
-import styles from './page.module.css'
+
 import { useEffect, useState } from 'react'
 import { Box, Typography } from '@mui/material';
 import axios from "axios"
-import Card from '../../Components/Card'
+import Card from '../../Components/card/Card'
 import Filter from "../../Components/Filter"
 import ShopCart from '../../Components/ShopCart';
 export default function Home() {
@@ -14,6 +14,7 @@ export default function Home() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [cartItems,setCartItems]=useState<Products[]>([])
   const [totalCost,setTotalCost]=useState<number>(0)
+  
 
   const openCart = ():void => { 
     setIsOpen(true);
@@ -26,6 +27,7 @@ useEffect(() => {
     axios.get<Products[]>(`http://localhost:3001/api/product/getAllProducts`)
     .then(res=>{
       setProducts(res.data)
+      
       
     })
     .catch(err=>console.error("err"))
@@ -151,7 +153,7 @@ useEffect(() => {
             
                           </Box>
             
-                        <Box sx={{
+                        <Box  sx={{
                           display:"flex",
                           gap:"30px",
                           width:"100%",
@@ -160,7 +162,7 @@ useEffect(() => {
                         }}>
                             
                             {products &&products.length!==0?
-                              products.map(item=><Card addToCart={addToCart} key={item.id} item={item}/>):""
+                              products.map(item=><Card  addToCart={addToCart} key={item.id} item={item}/>):""
                             }
                             {/* <Cart addToCart={addToCart} addToCollection={addToCollection} product={product} key={product.id}/> */}
                         </Box>
