@@ -67,13 +67,14 @@ const Login: React.FC <Props> = () => {
     }
     
     return (
+      <div className={styles.rect}>
       <Box style={{  background: 'linear-gradient(123deg, #984D38 0%, #181E41 63%)' ,
     
          }}>
-
+<Box>
       
 
-        <Box>
+        
         <Box 
         style={{
           width: 70,
@@ -124,36 +125,64 @@ const Login: React.FC <Props> = () => {
        
 
 <Link href="/">
-<Typography variant="h1" component="h2" style={{   color : "white" , fontSize: 30 , fontFamily: 'SF Pro Display' , letterSpacing: 0.30 , wordWrap: 'break-word' , fontWeight: '800' , marginLeft : 35 , marginTop : 20}}>
+<Typography 
+variant="h1" component="h2" 
+style={{
+     color : "white" ,
+      fontSize: 30 ,
+       fontFamily: 'SF Pro Display' ,
+        letterSpacing: 0.30 ,
+         wordWrap: 'break-word' ,
+          fontWeight: '800' ,
+           marginLeft : 35 ,
+            marginTop : 20
+            }}
+            >
      Login
     </Typography>
 </Link>
     <Box>
-    <Typography variant="h1" component="h5" style={{   color : "white" , fontSize: 15 , fontFamily: 'SF Pro Display' , letterSpacing: 0.30 , wordWrap: 'break-word'  , marginLeft : 35 , marginTop: 50}}>
+    <Typography variant="h1" component="h5"
+     style={{ 
+        color : "white" ,
+         fontSize: 15 ,
+          fontFamily: 'SF Pro Display' ,
+           letterSpacing: 0.30 ,
+            wordWrap: 'break-word'  ,
+             marginLeft : 35 ,
+              marginTop: 50
+              }}>
      New user ?
     </Typography>
-    <Link href="/"><Typography variant="h1" component="h5" style={{ fontSize: 15 , fontFamily: 'SF Pro Display' , letterSpacing: 0.30 , wordWrap: 'break-word'  , marginLeft : 110 , marginTop: -20,  color: '#6C5DD3',
-     fontSize: 18,
-     fontFamily: 'SF Pro Display',
+    <Link href="/"><Typography variant="h1" component="h5" 
+    style={{ 
+      fontSize: 18 ,
+       fontFamily: 'SF Pro Display' ,
+        letterSpacing: 0.36 ,
+         wordWrap: 'break-word'  ,
+          marginLeft : 110 ,
+           marginTop: -20,  color: '#6C5DD3',
      fontWeight: '500',
-     letterSpacing: 0.36}}>
+     }}
+     >
      Create an account
     </Typography>
     </Link>
     </Box>
 
 
-    <Box>
+    <Box >
 
     <FormControl 
-        sx={{ m: 1, width: '25ch' }} 
+        sx={{ m: 1, width: '46.5ch' }} 
         variant="standard">
           <InputLabel 
           style={{ color: "white" }} 
           >
             Email
             </InputLabel>
-          <Input   
+          <Input 
+          style={{ color: "white" }}   
  value={email}
  onChange={(e) => setEmail(e.target.value)}
  id="standard-start-adornment"
@@ -174,14 +203,15 @@ const Login: React.FC <Props> = () => {
       {show && (
         <Box>
           <FormControl 
-        sx={{ m: 1, width: '25ch' }} 
+        sx={{ m: 1, width: '46.5ch' }} 
         variant="standard">
           <InputLabel 
           style={{ color: "white" }} 
           htmlFor="standard-adornment-password">
             Password
             </InputLabel>
-          <Input   
+          <Input 
+          style={{ color: "white" }}   
  value={password}
  onChange={(e) => setPassword(e.target.value)}
  id="filled-adornment-password"
@@ -273,7 +303,7 @@ const Login: React.FC <Props> = () => {
             
           <Box 
            style={{
-            width: 309, 
+            width: 380, 
             height: 52,
              left: 60, 
              top: 30, 
@@ -293,10 +323,10 @@ const Login: React.FC <Props> = () => {
               >
           <Box 
            style={{
-            width: 30,
-             height: 30,
+            width: 15,
+             height: 15,
               left: -25,
-               top: 18, 
+               top: 15, 
                position: 'absolute'
                }}
                >
@@ -306,7 +336,7 @@ const Login: React.FC <Props> = () => {
         <Box 
          style={{
           left: 24,
-           top: 30,
+           top: 26,
             position: 'absolute',
              color: 'white', 
              fontSize: 18, 
@@ -324,19 +354,19 @@ const Login: React.FC <Props> = () => {
             style={{
               width: '100%',
                height: '100%',
-                position: 'relative' ,
-                 marginTop : -430
+               position: 'relative' ,
+                 marginTop : -630
                  }}
                  > 
             <Box 
              style={{
-              width: 309,
+              width: 380,
                height: 52,
                 left: 60, 
                 top: 30,
                  position: 'absolute',
                   borderRadius: 171, 
-                  border: '0.25px white solid' ,
+                  border: '0.25px #1877F2 solid' ,
                    background: '#1877F2'
                    }}
                    />
@@ -352,18 +382,18 @@ const Login: React.FC <Props> = () => {
              style={{
               width: 30,
                height: 30,
-                left: -25,
-                 top: 18, 
+                left: -22,
+                 top: 14, 
                  position: 'absolute'
                  }}
                  >
-            <Avatar src="https://clipart-library.com/images_k/facebook-icon-transparent-background/facebook-icon-transparent-background-8.jpg">
+            <Avatar src="https://static.vecteezy.com/system/resources/previews/018/930/476/original/facebook-logo-facebook-icon-transparent-free-png.png">
             </Avatar>
             </Box>
             <Box 
             style={{
               left: 24,
-               top: 30,
+               top: 26,
                 position: 'absolute',
                  color: 'white',
                   fontSize: 18,
@@ -377,9 +407,70 @@ const Login: React.FC <Props> = () => {
                       </Box>
             </Box>
             </Box>
+
+
+            <Box  
+            style={{
+              width: '100%',
+               height: '100%',
+                position: 'relative' ,
+                 marginTop : -630
+                 }}
+                 > 
+            <Box 
+             style={{
+              width: 380,
+               height: 52,
+                left: 60, 
+                top: 30,
+                 position: 'absolute',
+                  borderRadius: 171, 
+                  border: '0.25px black solid' ,
+                   background: 'black'
+                   }}
+                   />
+            <Box  style={{
+              width: 250, 
+              height: 60,
+               left: 119, 
+               top: 21.50, 
+               position: 'absolute'
+               }}
+               >
+            <Box 
+             style={{
+              width: 30,
+               height: 30,
+                left: -25,
+                 top: 17, 
+                 position: 'absolute'
+                 }}
+                 >
+            <Avatar src="https://www.tabletowo.pl/wp-content/uploads/2020/06/apple-logo-tabletowo-10-lecie.jpg">
+            </Avatar>
+            </Box>
+            <Box 
+            style={{
+              left: 24,
+               top: 26,
+                position: 'absolute',
+                 color: 'white',
+                  fontSize: 18,
+                   fontFamily: 'SF Pro Display',
+                    fontWeight: '500', 
+                    letterSpacing: 0.36, 
+                    wordWrap: 'break-word'
+                    }}
+                    >
+                      Continue With Appel
+                      </Box>
+            </Box>
+            </Box>
           </Box>
+          </Box>
+        </div>
         
-          </Box>
+          
     );
 }
 
