@@ -21,7 +21,7 @@ interface User {
   lastName?: string,
   email?: string,
   password?: string,
-  image: string,
+  image?: string,
   birthday?: string,
   role?: string,
 }

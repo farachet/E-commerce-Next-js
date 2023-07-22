@@ -26,7 +26,7 @@ const ClientBody: React.FC<Props> = ({
         <Box
           sx={{
             backgroundColor: "rgba(255, 255, 255, 0.1)",
-            width: "384px",
+            width: "414px",
             height: "371px",
           }}
         >
