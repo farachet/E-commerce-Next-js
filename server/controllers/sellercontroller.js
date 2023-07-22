@@ -5,8 +5,12 @@ module.exports= {
     },
 
     updateSeller:(req,res)=>{
-        console.log(req.params.sellerId)
-        seller.update(req.body.firstName , req.body.lastName , {where:{id:req.params.id}})
+        const Updated = {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+          }
+        seller.update(Updated , {where:{id:req.params.id}})
         .then(result =>
          res.status(201).json(result)
          )
@@ -15,4 +19,15 @@ module.exports= {
         )
     },
 
+   getOneByid : (req,res) => {
+        seller.findAll({where : {id : req.params.id } })
+          .then((result) => {
+            res.json(result);
+          })
+          .catch((err) => {
+            res.status(500).send(err);
+          });
+    }
+
+ 
 }
