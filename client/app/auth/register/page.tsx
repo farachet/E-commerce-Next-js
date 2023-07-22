@@ -6,10 +6,10 @@ import Link from 'next/link'
 import axios from "axios";
 import { Box, Typography, Button, Avatar,Input } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import FormControl from "@mui/material/FormControl";
 import IconButton from "@mui/material/IconButton";
 import FilledInput from "@mui/material/FilledInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -24,7 +24,7 @@ interface Props{
         birthday: string;
         role: string;
 }
-const Register: React.FC <Props> = () => {
+  const Register: React.FC <Props> = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -32,24 +32,23 @@ const Register: React.FC <Props> = () => {
   const [birthday, setBirthday] = useState("");
   const [role, setRole] = useState("");
   
-  const [showPassword, setShowPassword] = useState(false);
   
-  
-  const router = useRouter()
-        const handleClickShowPassword = () => setShowPassword((show) => !show);
-        const handleMouseDownPassword = (event:any) => {
+   const router = useRouter()
+
+   
+   const [showPassword, setShowPassword] = useState(false)
+   const handleClickShowPassword = () => setShowPassword((show) => !show);
+   const handleMouseDownPassword = (event:any) => {
           event.preventDefault();
         };
         
-        const handleChangeRole = (event:any) => {
-     
-        
-          setRole(event.target.value);
+   const handleChangeRole = (event:any) => {
+     setRole(event.target.value);
         };
         console.log("role", role);
         const handleSubmit = () => {
           console.log(email, firstName, lastName, password, birthday, role);
-          axios.post("http://localhost:3001/api/user/signup", {
+          axios.post('http://localhost:3001/api/user/signup', {
               email: email,
               firstName: firstName,
               lastName: lastName,
@@ -86,7 +85,7 @@ const Register: React.FC <Props> = () => {
                 className={style.Image8}
                 style={{
                   marginLeft: 306,
-                  marginTop: 150,
+                  marginTop: 115,
                   borderRadius: 0,
                   outline: "none",
                   justifyContent: "center",
@@ -101,8 +100,8 @@ const Register: React.FC <Props> = () => {
                 letterSpacing: 0.30,
                 wordWrap: "break-word",
                 fontWeight: "800",
-                marginLeft: 100,
-                marginTop: 500,
+                marginLeft: 120,
+                marginTop: 450,
               }}
             >
               Begin your meta fashion journey here
@@ -112,7 +111,7 @@ const Register: React.FC <Props> = () => {
         
           style={{
             width: 490,
-            height: 600,
+            height: 700,
             left: 699,
             top: 130,
             position: "absolute",
@@ -350,7 +349,7 @@ const Register: React.FC <Props> = () => {
 
 
                 <Button
-                  onClick={handleSubmit}
+                  onClick={ () => {handleSubmit()}}
                   style={{
                     color: "white",
                     fontSize: 15,

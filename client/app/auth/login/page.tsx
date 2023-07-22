@@ -6,6 +6,12 @@ import { Box, Button , appBarClasses , Avatar , Input, Select, MenuItem } from "
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useRouter} from 'next/navigation'
+import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import IconButton from "@mui/material/IconButton";
 import Link from 'next/link'
 import axios from 'axios';
 // import {ecommerceContext} from "../../ecommerceContext/e-commerceContext"
@@ -22,17 +28,26 @@ const Login: React.FC <Props> = () => {
     const [email,setEmail]= useState ("")
     const [password,setPassword]= useState ("")
     const [role, setRole] = useState("");
+
+
     const router = useRouter()
-    const handleChangeRole=(e)=>{
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleMouseDownPassword = (event:any) => {
+      event.preventDefault();
+    };
+
+
+    const handleChangeRole=(e : any )=>{
       setRole(e.target.value)
     }
     const handleSubmit= ()=>{
-      
     
       axios.post('http://localhost:3001/api/user/signin',{
-      "email":email,
-      "password":password,
-      "role":role
+      email:email,
+      password:password,
+      role:role
       }).then(res=>{
         console.log("welcome",res.data)
         localStorage.setItem("token",res.data.acsessToken)
@@ -52,15 +67,52 @@ const Login: React.FC <Props> = () => {
     }
     
     return (
-        <Box >
-        <Box style={{width : 100 , height : 150 , marginTop : -50}}> 
-             <img className="Image8" style={{marginLeft : 306 , marginTop : 100  , borderRadius:0 , outline: 'none' , justifyContent : "center" }}/>
+      <Box style={{  background: 'linear-gradient(123deg, #984D38 0%, #181E41 63%)' ,
+    
+         }}>
+
+      
+
+        <Box>
+        <Box 
+        style={{
+          width: 70,
+                height: 150,
+                marginTop: -10,
+          }}
+            > 
+             <img className={styles.Image8 }
+             style={{
+              marginLeft : 306 ,
+               marginTop : 100  ,
+                borderRadius:0 ,
+                 outline: 'none' ,
+                  justifyContent : "center" 
+                  }}
+                  />
+             </Box>
+
+             <Typography
+              style={{
+                color: "white",
+                fontSize: 30,
+                fontFamily: "SF Pro Display",
+                letterSpacing: 0.30,
+                wordWrap: "break-word",
+                fontWeight: "800",
+                marginLeft: 120,
+                marginTop: 450,
+              }}
+            >
+              Explore the world of meta fashion
+            </Typography>
+
              </Box>
              <Box
            
             style={{
               width: 490,
-              height: 600,
+              height:700,
               left: 699,
               top: 130,
               position: "absolute",
@@ -69,6 +121,7 @@ const Login: React.FC <Props> = () => {
               borderRadius: 10,
             }}
           >
+       
 
 <Link href="/">
 <Typography variant="h1" component="h2" style={{   color : "white" , fontSize: 30 , fontFamily: 'SF Pro Display' , letterSpacing: 0.30 , wordWrap: 'break-word' , fontWeight: '800' , marginLeft : 35 , marginTop : 20}}>
@@ -85,15 +138,33 @@ const Login: React.FC <Props> = () => {
      fontWeight: '500',
      letterSpacing: 0.36}}>
      Create an account
-    </Typography>-
+    </Typography>
     </Link>
     </Box>
 
 
     <Box>
-<Typography style={{color: 'white', fontSize: 18, fontFamily: 'SF Pro Display', fontWeight: '400', letterSpacing: 0.36, wordWrap: 'break-word' , marginTop: 55 , marginLeft:30}}>Email Address</Typography>
-    <Input onChange={(e)=>setEmail(e.target.value)}  className="Line381" style={{width: 409, fontFamily: 'SF Pro Display', height: 0, left: 30, top: 210, position: 'absolute', border: '0.25px rgba(255, 255, 255, 0.50) solid'  , color : "white"}}
-            />
+
+    <FormControl 
+        sx={{ m: 1, width: '25ch' }} 
+        variant="standard">
+          <InputLabel 
+          style={{ color: "white" }} 
+          >
+            Email
+            </InputLabel>
+          <Input   
+ value={email}
+ onChange={(e) => setEmail(e.target.value)}
+ id="standard-start-adornment"
+  endAdornment={
+              <InputAdornment 
+              position="start">
+              </InputAdornment>
+            }
+          />
+ </FormControl>
+
    {!show && (
         <Box className="Frame1" style={{ width: 70, height: 10, paddingLeft: 20, paddingRight: 20, paddingTop: 10, paddingBottom: 10, background: 'linear-gradient(214deg, #B75CFF 0%, #671AE4 100%)', borderRadius: 121, justifyContent: 'center', alignItems: 'center', gap: 10, display: 'inline-flex' , marginLeft: 330 , marginTop : 20}}>
           <Button onClick={()=>setShow(true)} style={{color: 'white', fontSize: 16, fontFamily: 'Poppins', fontWeight: '400', wordWrap: 'break-word'}}> Continue</Button>
@@ -102,8 +173,33 @@ const Login: React.FC <Props> = () => {
 
       {show && (
         <Box>
-          <Typography style={{color: 'white', fontSize: 18, fontFamily: 'SF Pro Display', fontWeight: '400', letterSpacing: 0.36, wordWrap: 'break-word' , marginTop: 55 , marginLeft:30}}>Password</Typography>
-          <Input onChange={(e)=>setPassword(e.target.value)} className="Line381"  style={{width: 409, fontFamily: 'SF Pro Display', height: 0, left: 30, top: 290, position: 'absolute', border: '0.25px rgba(255, 255, 255, 0.50) solid'  , color : "white"}} />
+          <FormControl 
+        sx={{ m: 1, width: '25ch' }} 
+        variant="standard">
+          <InputLabel 
+          style={{ color: "white" }} 
+          htmlFor="standard-adornment-password">
+            Password
+            </InputLabel>
+          <Input   
+ value={password}
+ onChange={(e) => setPassword(e.target.value)}
+ id="filled-adornment-password"
+ type={showPassword ? "text" : "password"}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+
           <Box>
             <Typography
               variant="h5"
@@ -133,37 +229,157 @@ const Login: React.FC <Props> = () => {
               <MenuItem value="seller">Seller</MenuItem>
             </Select>
           </Box>
-          <Box className="Frame1" style={{ width: 70, height: 10, paddingLeft: 20, paddingRight: 20, paddingTop: 10, paddingBottom: 10, background: 'linear-gradient(214deg, #B75CFF 0%, #671AE4 100%)', borderRadius: 121, justifyContent: 'center', alignItems: 'center', gap: 10, display: 'inline-flex' , marginLeft: 330 , marginTop : 20}}>
-            <Box onClick={()=>handleSubmit()} className="Continue" style={{color: 'white', fontSize: 16, fontFamily: 'Poppins', fontWeight: '400', wordWrap: 'break-word'}}>Log In</Box>
+          <Box className="Frame1" 
+          style={{ 
+            width: 70,
+             height: 10,
+              paddingLeft: 20,
+               paddingRight: 20,
+                paddingTop: 10,
+                 paddingBottom: 10,
+                  background: 'linear-gradient(214deg, #B75CFF 0%, #671AE4 100%)',
+                   borderRadius: 121,
+                    justifyContent: 'center',
+                     alignItems: 'center',
+                      gap: 10,
+                       display: 'inline-flex' ,
+                        marginLeft: 330 ,
+                         marginTop : 20
+                         }}
+                         >
+            <Button onClick={()=>handleSubmit()}
+             style={{
+              color: 'white',
+               fontSize: 15,
+                fontFamily: 'Poppins',
+                 fontWeight: '300',
+                  wordWrap: 'break-word'
+                  }}
+                  >
+                    Log In
+                  </Button>
           </Box>
         </Box>
       )}
-
-
             </Box>
            
-            <Box  style={{width: '100%', height: '100%', position: 'relative' }}>
+            <Box 
+             style={{
+              width: '100%',
+               height: '100%',
+                position: 'relative' 
+                }}
+                >
             
-          <Box  style={{width: 309, height: 52, left: 60, top: 30, position: 'absolute', borderRadius: 171, border: '0.25px white solid'}} />
-         <Box  style={{width: 222, height: 30, left: 119, top: 21.50, position: 'absolute'}}>
-          <Box  style={{width: 30, height: 30, left: -25, top: 18, position: 'absolute'}}>
-        <Avatar src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png"></Avatar>
+          <Box 
+           style={{
+            width: 309, 
+            height: 52,
+             left: 60, 
+             top: 30, 
+             position: 'absolute',
+              borderRadius: 171,
+               border: '0.25px white solid'
+               }} 
+               />
+         <Box 
+          style={{
+            width: 222,
+             height: 30,
+              left: 119, 
+              top: 21.50, 
+              position: 'absolute'
+              }}
+              >
+          <Box 
+           style={{
+            width: 30,
+             height: 30,
+              left: -25,
+               top: 18, 
+               position: 'absolute'
+               }}
+               >
+        <Avatar src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png">
+        </Avatar>
           </Box>
-        <Box  style={{left: 24, top: 30, position: 'absolute', color: 'white', fontSize: 18, fontFamily: 'SF Pro Display', fontWeight: '500', letterSpacing: 0.36, wordWrap: 'break-word'}}>Continue With Google</Box>
+        <Box 
+         style={{
+          left: 24,
+           top: 30,
+            position: 'absolute',
+             color: 'white', 
+             fontSize: 18, 
+             fontFamily: 'SF Pro Display',
+              fontWeight: '500',
+               letterSpacing: 0.36, 
+               wordWrap: 'break-word'
+               }}
+               >
+                Continue With Google
+               </Box>
         </Box>
             </Box>
-            <Box  style={{width: '100%', height: '100%', position: 'relative' , marginTop : -430}}> 
-            <Box  style={{width: 309, height: 52, left: 60, top: 30, position: 'absolute', borderRadius: 171, border: '0.25px white solid' , background: '#1877F2'}}/>
-            <Box  style={{width: 222, height: 30, left: 119, top: 21.50, position: 'absolute'}}>
-            <Box  style={{width: 30, height: 30, left: -25, top: 18, position: 'absolute'}}>
-            <Avatar src="https://clipart-library.com/images_k/facebook-icon-transparent-background/facebook-icon-transparent-background-8.jpg"></Avatar>
+            <Box  
+            style={{
+              width: '100%',
+               height: '100%',
+                position: 'relative' ,
+                 marginTop : -430
+                 }}
+                 > 
+            <Box 
+             style={{
+              width: 309,
+               height: 52,
+                left: 60, 
+                top: 30,
+                 position: 'absolute',
+                  borderRadius: 171, 
+                  border: '0.25px white solid' ,
+                   background: '#1877F2'
+                   }}
+                   />
+            <Box  style={{
+              width: 222, 
+              height: 30,
+               left: 119, 
+               top: 21.50, 
+               position: 'absolute'
+               }}
+               >
+            <Box 
+             style={{
+              width: 30,
+               height: 30,
+                left: -25,
+                 top: 18, 
+                 position: 'absolute'
+                 }}
+                 >
+            <Avatar src="https://clipart-library.com/images_k/facebook-icon-transparent-background/facebook-icon-transparent-background-8.jpg">
+            </Avatar>
             </Box>
-            <Box style={{left: 24, top: 30, position: 'absolute', color: 'white', fontSize: 18, fontFamily: 'SF Pro Display', fontWeight: '500', letterSpacing: 0.36, wordWrap: 'break-word'}}>Continue With facebook</Box>
+            <Box 
+            style={{
+              left: 24,
+               top: 30,
+                position: 'absolute',
+                 color: 'white',
+                  fontSize: 18,
+                   fontFamily: 'SF Pro Display',
+                    fontWeight: '500', 
+                    letterSpacing: 0.36, 
+                    wordWrap: 'break-word'
+                    }}
+                    >
+                      Continue With facebook
+                      </Box>
             </Box>
             </Box>
           </Box>
-        </Box>
-
+        
+          </Box>
     );
 }
 
