@@ -10,8 +10,8 @@ module.exports= {
         .then(result =>
          res.status(201).json(result)
          )
-        .catch(err=> 
-        res.status(500).json(err)
+        .catch(error=> 
+        res.status(500).json(error)
         )
     },
 
