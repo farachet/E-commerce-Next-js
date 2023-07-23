@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect,useContext } from 'react';
+import React, { useState, useEffect , useContext} from 'react';
 import style from "./page.module.css"
 import { Box, Button,  Avatar , IconButton , Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
@@ -9,8 +9,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { ecommerceContext } from "@/app/Context/ecommerce";
 import axios  from 'axios';
-import { ecommerceContext } from '@/app/Context/ecommerce';
+
 interface Product {
   id: number;
   productname: string;
@@ -21,30 +22,35 @@ interface Product {
 }
 
 type Props = {
-setShow : (a:string) => void,
-HandleEdit : (a:number) => void,
-handleRefresh : () => void
+
+HandleEdit : (a:number) => void
+setOpenEdit : (a:boolean) => void
 
 }
-const Products: React.FC<Props>= ({setShow , HandleEdit})  =>  {
-    const {user}=useContext(ecommerceContext)
+const Products: React.FC<Props>= ({ HandleEdit , setOpenEdit})  =>  {
+  const {user}=useContext(ecommerceContext)
+  console.log("currrentUser",user)
     const [data, setData] = useState<Product[]>([]);
-    const [open, setOpen] = React.useState(false);
+    const [openn, setOpenn] = React.useState(false);
     const [playSound, setPlaySound] = React.useState(false);
-    const [refresh,setRefresh]=useState<boolean>(false)
-    const handleRefresh=()=>{
-      setRefresh(!refresh)
-    }
+
     const handleClickOpen = () => {
-      setOpen(true);
+      setOpenn(true);
     }
   
     const handleClose = () => {
-      setOpen(false)
+      setOpenn(false)
+    }
+
+  
+    const handleCloseEdit = () => {
+      setOpenEdit(false)
     }
     
 
-  
+    useEffect(() => {
+      fetch()
+    }, [])
 
     const fetch = () => {
         axios
@@ -58,9 +64,7 @@ const Products: React.FC<Props>= ({setShow , HandleEdit})  =>  {
           })
       }
 
-      useEffect(() => {
-        fetch()
-      }, [])
+   
 
 
       const deleteProduct = (id : number) => {
@@ -126,8 +130,8 @@ axios.delete(`http://localhost:3001/api/product/deleteByid/${id}`)
 
           <IconButton aria-label="edit">
             <EditIcon  onClick={()=> {
-              setShow("")
               HandleEdit(el.id)
+            
               console.log(el.id)
 
               
@@ -136,7 +140,7 @@ axios.delete(`http://localhost:3001/api/product/deleteByid/${id}`)
 
           <Box>
       <Dialog
-        open={open}
+        open={openn}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"

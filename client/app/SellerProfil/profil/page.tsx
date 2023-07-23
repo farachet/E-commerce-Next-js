@@ -24,7 +24,7 @@ interface seller {
 }
 
 const Profil = () => {
-  const {user}=useContext(ecommerceContext) //user
+  const {user}=useContext(ecommerceContext)
   console.log("currrentUser",user)
   const [open, setOpen] = React.useState(false);
   const [openPic, setOpenPic] = useState<boolean>(false);
@@ -93,7 +93,7 @@ const handleCloseCover = () => {
     email: string
   ) => {
     axios
-      .put(`http://localhost:3001/api/seller/Update/${user.id}`, {
+      .put(`http://localhost:3001/api/seller/Update/1`, {
         firstName: firstName,
         lastName: lastName,
         email: email,
@@ -127,7 +127,7 @@ const handleCloseCover = () => {
   }
 
   const UpdateImage = () => {
-    axios.put(`http://localhost:3001/api/seller/UpdateImage/${user.id}`, {
+    axios.put("http://localhost:3001/api/seller/UpdateImage/1", {
   
       image: imageUrl,
      
@@ -196,7 +196,7 @@ const handleCloseCover = () => {
             <ModeEditOutlineIcon style={{ color: "white" }} onClick={handleClickOpenCover} />
           </Box>
 
-          
+        
             <Box key={user.id}>
               <Box
                 sx={{
@@ -264,7 +264,7 @@ const handleCloseCover = () => {
                 </Box>
               </Box>
             </Box>
-        
+      
 
           <Button
             className={style.editbtn}

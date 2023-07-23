@@ -1,9 +1,10 @@
-import React, { useState , useEffect, useContext } from 'react';
+import React, { useState , useEffect , useContext } from 'react';
 import "./addProduct.css"
 import { Box, Input, Button, TextField } from "@mui/material";
 import axios  from 'axios';
 import { FormControl, InputLabel,Select,MenuItem} from '@mui/material'
-import { ecommerceContext } from '@/app/Context/ecommerce';
+import { ecommerceContext } from "@/app/Context/ecommerce";
+
 interface Product {
   id: number;
   productname: string;
@@ -23,11 +24,13 @@ const AddProducts: React.FC = () => {
   const [imageUrl, setImageUrl] = useState<string>("")
   const [status, setStatus] = useState("")
   const [approved, setApproved] = useState(0)
-
   const [file, setFile] = useState<File | null>(null)
-  const [categoryId , setCategoryId] = useState<number>(2)
+  const [categoryId , setCategoryId] = useState<number>(0)
 
 
+  useEffect(() => {
+    fetch()
+  },  [])
 
  
 
@@ -43,12 +46,8 @@ const fetch = () => {
       })
   }
 
-  useEffect(() => {
-    fetch()
-  },  [])
 
   const AddProduct = () => {
-    console.log("prod")
     axios.post("http://localhost:3001/api/product/AddProduct", {
       productname: productname,
       price: price,
@@ -56,8 +55,7 @@ const fetch = () => {
       image: imageUrl,
       status: status,
       approved: approved,
-      sellerId: user.id,
-      categoryId:categoryId
+      sellerId: user.id
     })
       .then((res: any) => {
         console.log(res.data);

@@ -1,23 +1,29 @@
 "use client"
 import React , {useState , useEffect }from 'react'
-import { Container,Box, Typography , TextField , Button } from '@mui/material'
+import {Box , Button } from '@mui/material'
+import TextField from "@mui/material/TextField";
 import style from "./page.module.css";
-
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete'
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import axios from "axios"
 
 type Props ={
   UpdateProduct : (a:number , b: string , c: number , d : string , e : string , f : string) => void
-  setShow : (a : string) => void
   Editt : number
+  setOpenEdit: (a: boolean) => void;
   }
 
 
 
-const Edit  : React.FC<Props> = ({UpdateProduct , setShow ,  Editt }) => {
+const Edit  : React.FC<Props> = ({UpdateProduct ,  Editt , setOpenEdit }) => {
   console.log( "edit " , Editt)
   console.log( "updateP " , UpdateProduct)
 
-
-    const [open, setOpen] = React.useState(false)
     const [productname, setProductname] = useState<string>("");
     const [price, setPrice] = useState<string>("");
     const [reference, setReference] = useState<string>("");
@@ -25,93 +31,118 @@ const Edit  : React.FC<Props> = ({UpdateProduct , setShow ,  Editt }) => {
     const [status, setStatus] = useState<string>("");
     const [approved, setApproved] = useState<number>(0);
     const [sellerId, setSellerId] = useState<number>(1);
+    const [products, setProducts] = useState([]);
 
-
+    useEffect(() => {
+      fetchData()
+      console.log("it works")
+    }, [])
     
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
+    
+    const fetchData = () => {
+      axios.get(`http://localhost:3001/api/product/getAll/1`)
+        .then((res) => {
+          console.log(res.data)
+          console.log("hello")
+          setProducts(res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+    
+    
 
-  const handleClose = () => {
-    setOpen(false)
-  }
+    const handleCloseEdit = () => {
+      setOpenEdit(false)
+      fetchData()
+      
+    }
+      
 
+    const handleOpenEdit = () => {
+      setOpenEdit(true)
+    }
+
+
+  
 
   return (
    
-    <Box className="box2">
-      <Box className="Card" style={{ position: "relative" }}>
-        <Box
-          className="Rectangle24"
-          style={{
-            width: 300,
-            height: 1204,
 
-            background: "rgba(255, 255, 255, 0.10)",
-            boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.15)",
-            borderRadius: 10,
-          }}
-        >
-
-        <Box sx={{display:"flex",flexDirection:"column"}}>
-          
-            <TextField 
-              value={productname}
-              onChange={(event) => setProductname(event.target.value)}
-            label={'type product name'} 
-            id="margin-none"   
-            style={{marginTop : 80}}
-             />
-
-            <TextField
-                   value={price}
-                   onChange={(event) => setPrice(event.target.value)}
-            sx={{color : "white"}}
-             label={'type product price '} 
-             id="margin-dense" 
-             
-             margin="dense" />
-            <TextField 
-             value={reference}
-             onChange={(event) => setReference(event.target.value)}
-            label={'type product reference '}
-             id="margin-none"
-               />
-
-          <TextField 
-          value={image}
-          onChange={(event) => setImage(event.target.value)}
-          label={'type product image'} 
-          id="margin-dense"
-           margin="dense" 
-           />
-
-<TextField 
-          value={status}
-          onChange={(event) => setStatus(event.target.value)}
-          label={'type product status'} 
-          id="margin-dense"
-           margin="dense" 
-           />
-
-<Button
-
-onClick={() => {
-  alert("hello")
-  UpdateProduct( Editt , productname  , parseInt (price)  , reference , image , status )
-    setShow('AddProducts')
-    
-  }}
-
- variant="contained"
-  style={{width : "20%"}}
-  >
-    Edit</Button>
+    <Dialog open={open} onClose={handleCloseEdit}>
+    <DialogTitle>Edit Profil</DialogTitle>
+    <DialogContent>
+      <TextField
+        autoFocus
+        margin="dense"
+        id="name"
+        label="product name"
+        type="name"
+        fullWidth
+        variant="standard"
+       value={productname}
+      onChange={(event) => setProductname(event.target.value)}
+      />
+      <TextField
        
-                </Box>
-        </Box>
-    </Box>
-    </Box>
+        margin="dense"
+        id="name"
+        label="price"
+        type="name"
+        fullWidth
+        variant="standard"
+        value={price}
+        onChange={(event) => setPrice(event.target.value)}
+      />
+    
+      <TextField
+        autoFocus
+        margin="dense"
+        id="name"
+        label="reference"
+        type="name"
+        fullWidth
+        variant="standard"
+        value={reference}
+        onChange={(event) => setReference(event.target.value)}
+      />
+        <TextField
+        autoFocus
+        margin="dense"
+        id="name"
+        label="image"
+        type="name"
+        fullWidth
+        variant="standard"
+        value={image}
+        onChange={(event) => setImage(event.target.value)}
+      />
+        <TextField
+        autoFocus
+        margin="dense"
+        id="name"
+        label="status"
+        type="name"
+        fullWidth
+        variant="standard"
+        value={status}
+              onChange={(event) => setStatus(event.target.value)}
+      />
+    </DialogContent>
+    <DialogActions>
+      <Button onClick={handleCloseEdit}>Cancel</Button>
+      <Button
+        onClick={() => {
+          UpdateProduct( Editt , productname  , parseInt (price)  , reference , image , status )
+          handleCloseEdit();
+          fetchData()
+        }}
+      >
+        Edit
+      </Button>
+    </DialogActions>
+    </Dialog> 
 
  
 
@@ -119,3 +150,7 @@ onClick={() => {
 }
 
 export default Edit
+
+
+
+
