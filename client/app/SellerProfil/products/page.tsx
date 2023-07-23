@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import style from "./page.module.css"
 import { Box, Button,  Avatar , IconButton , Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
@@ -10,7 +10,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import axios  from 'axios';
-
+import { ecommerceContext } from '@/app/Context/ecommerce';
 interface Product {
   id: number;
   productname: string;
@@ -21,16 +21,20 @@ interface Product {
 }
 
 type Props = {
-setShow : (a:string) => void
-HandleEdit : (a:number) => void
+setShow : (a:string) => void,
+HandleEdit : (a:number) => void,
+handleRefresh : () => void
 
 }
 const Products: React.FC<Props>= ({setShow , HandleEdit})  =>  {
-
+    const {user}=useContext(ecommerceContext)
     const [data, setData] = useState<Product[]>([]);
     const [open, setOpen] = React.useState(false);
     const [playSound, setPlaySound] = React.useState(false);
-
+    const [refresh,setRefresh]=useState<boolean>(false)
+    const handleRefresh=()=>{
+      setRefresh(!refresh)
+    }
     const handleClickOpen = () => {
       setOpen(true);
     }
@@ -44,7 +48,7 @@ const Products: React.FC<Props>= ({setShow , HandleEdit})  =>  {
 
     const fetch = () => {
         axios
-        .get(`http://localhost:3001/api/product/getAll/2`)
+        .get(`http://localhost:3001/api/product/getAll/${user.id}`)
           .then((res) => {
             console.log(res.data)
             setData(res.data)

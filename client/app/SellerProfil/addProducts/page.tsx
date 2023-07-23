@@ -1,9 +1,9 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState , useEffect, useContext } from 'react';
 import "./addProduct.css"
 import { Box, Input, Button, TextField } from "@mui/material";
 import axios  from 'axios';
 import { FormControl, InputLabel,Select,MenuItem} from '@mui/material'
-
+import { ecommerceContext } from '@/app/Context/ecommerce';
 interface Product {
   id: number;
   productname: string;
@@ -15,7 +15,7 @@ interface Product {
 }
 
 const AddProducts: React.FC = () => {
-
+  const {user}=useContext(ecommerceContext)
   const [productname, setProductname] = useState("")
   const [data , setData] = useState<Product[]>([])
   const [price, setPrice] = useState("");
@@ -23,9 +23,9 @@ const AddProducts: React.FC = () => {
   const [imageUrl, setImageUrl] = useState<string>("")
   const [status, setStatus] = useState("")
   const [approved, setApproved] = useState(0)
-  const [sellerId, setSellerId] = useState(1)
+
   const [file, setFile] = useState<File | null>(null)
-  const [categoryId , setCategoryId] = useState<number>(0)
+  const [categoryId , setCategoryId] = useState<number>(2)
 
 
 
@@ -33,7 +33,7 @@ const AddProducts: React.FC = () => {
 
 const fetch = () => {
     axios
-    .get(`http://localhost:3001/api/product/getAll/1`)
+    .get(`http://localhost:3001/api/product/getAll/${user.id}`)
       .then((res : any) => {
         console.log(res.data)
         setData(res.data)
@@ -48,6 +48,7 @@ const fetch = () => {
   },  [])
 
   const AddProduct = () => {
+    console.log("prod")
     axios.post("http://localhost:3001/api/product/AddProduct", {
       productname: productname,
       price: price,
@@ -55,7 +56,8 @@ const fetch = () => {
       image: imageUrl,
       status: status,
       approved: approved,
-      sellerId: sellerId
+      sellerId: user.id,
+      categoryId:categoryId
     })
       .then((res: any) => {
         console.log(res.data);

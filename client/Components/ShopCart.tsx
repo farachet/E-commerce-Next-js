@@ -10,8 +10,9 @@ type Props={
   totalCost:number,
   cartItems:Products[],
   handleDeleteFromCart:(productId:number)=>void
+  handleCheckout:()=>void
 }
-const ShopCart:React.FC<Props> = ({openCart,isOpen,closeCart,totalCost,cartItems,handleDeleteFromCart}) => {
+const ShopCart:React.FC<Props> = ({openCart,isOpen,closeCart,totalCost,cartItems,handleDeleteFromCart,handleCheckout}) => {
   if(!cartItems){
     return null
   }
@@ -112,7 +113,7 @@ const ShopCart:React.FC<Props> = ({openCart,isOpen,closeCart,totalCost,cartItems
       </Typography>
     </div>
     <Button
-    
+    onClick={handleCheckout}
     className='checkout-btn'
         sx={{
           color:"white",

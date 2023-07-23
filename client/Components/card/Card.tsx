@@ -10,7 +10,7 @@ type Props = {
 };
 
 const Card: React.FC<Props> = ({ item, addToCart,addToCollection }) => {
-  if (!item.productname) {
+  if (!item.category) {
     return null;
   }
   return (
