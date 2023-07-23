@@ -2,7 +2,7 @@ import React, { useState , useEffect } from 'react';
 import "./addProduct.css"
 import { Box, Input, Button, TextField } from "@mui/material";
 import axios  from 'axios';
-
+import { FormControl, InputLabel,Select,MenuItem} from '@mui/material'
 
 interface Product {
   id: number;
@@ -11,6 +11,7 @@ interface Product {
   reference: string;
   image: string;
   status: string;
+  categoryId : categoryId
 }
 
 const AddProducts: React.FC = () => {
@@ -24,8 +25,11 @@ const AddProducts: React.FC = () => {
   const [approved, setApproved] = useState(0)
   const [sellerId, setSellerId] = useState(1)
   const [file, setFile] = useState<File | null>(null)
+  const [categoryId , setCategoryId] = useState<number>(0)
 
 
+
+ 
 
 const fetch = () => {
     axios
@@ -101,7 +105,7 @@ const fetch = () => {
             borderRadius: 10,
           }}
         >
-          <Box  sx={{color : "white" , width : "100%" }}>Add New product</Box>
+    
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <TextField
               value={productname}
