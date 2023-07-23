@@ -1,7 +1,8 @@
-import Navbar from '@/Components/Navbar'
+import NavBar from '../Components/navbar/navbar'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import EcommerceContextProvider from './Context/ecommerce'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,8 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body  className={inter.className}>
-        <Navbar/>
-        {children}
+        <EcommerceContextProvider>
+
+            <NavBar/>
+            {children}
+        </EcommerceContextProvider>
         </body>
     </html>
   )

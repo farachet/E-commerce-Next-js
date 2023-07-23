@@ -11,7 +11,7 @@ interface Product {
   reference: string;
   image: string;
   status: string;
-  categoryId : categoryId
+  categoryId : number
 }
 
 const AddProducts: React.FC = () => {

@@ -1,5 +1,5 @@
-import React , {useState,useContext}from "react";
-import "./style.css";
+import React from "react";
+import "../Navbar/Navbar.css";
 import { AppBar, Toolbar, Typography, Box } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Avatar from "@mui/material/Avatar";
@@ -7,34 +7,11 @@ import { IconButton } from "@mui/material";
 import { NotificationsActive, Chat } from "@mui/icons-material";
 import { FormControl } from "@mui/material";
 
-import {Link} from "react-router-dom"
-import {ecommerceContext} from '../../ecommerceContext/e-commerceContext'
-
-
 function Navbar() {
-  const {currentUser,search}=useContext(ecommerceContext)
-
-  const [input , setInput] = useState("")
-
-  
-
-
-
-
-
-
-  
-
-
-
   return (
-    <AppBar position="static" className="header" style={{  display: "flex" , justifycontent : 'spaceBetween' }}>
-      <Toolbar sx={
-        {
-          display:"flex",
-          justifyContent:"space-between"
-        }
-      } >
+    <div>
+<AppBar position="static" className="header" style={{ display: "flex", justifyContent: 'spaceBetween' }}>
+      <Toolbar >
       <Box style={{ display: "inline-block" }}>
   <Typography className="logo" style={{ display: "inline-block" }}>
     Logo
@@ -42,15 +19,7 @@ function Navbar() {
 
   <Box className="search-container" style={{ display: "inline-block" }}>
     <SearchIcon className="search-icon" />
-    <input 
-    value={input}
-    onChange={(e) => {
-      setInput(e.target.value)
-      search(e.target.value)
-      
-      }}
-    
-
+    <input
       className="search-items"
       type="text"
       placeholder="Search Items, Fashion, Collection, and Users"
@@ -59,17 +28,9 @@ function Navbar() {
 
 
 
- <Link to="home">
- <Typography className="Home" style={{ display: "inline-block" }}>
+  <Typography className="Home" style={{ display: "inline-block" }}>
     Home
   </Typography>
- </Link>
-
- {currentUser.role==="client"? <Link to='/allProduct'>
- <Typography className="Home" style={{ display: "inline-block" }}>
-    All Products
-
-  </Typography></Link> :""}
   <Typography className="explore" style={{ display: "inline-block" }}>
     Explore
     <FormControl>
@@ -80,51 +41,36 @@ function Navbar() {
       </Select>  */}
     </FormControl>
   </Typography>
- {currentUser.role==="client"?<Link to="/PersonalCollection">
- <Typography
+  <Typography
     className="personal-collection"
     style={{ display: "inline-block" }}
   >
     Personal Collection
   </Typography>
- </Link> :""}
- <Link to="/aboutus">
- <Typography
-    className="personal-collection"
-    style={{ display: "inline-block" }}
-  >
-    About Us
-  </Typography>
- </Link> 
 
+  <Typography variant="body1" className="drops" style={{ display: "inline-block" }}>
+    Drops
+  </Typography>
   <Typography variant="body1" className="more" style={{ display: "inline-block" }}>
     More
   </Typography>
 </Box>
-
-
-        <Box>
-        <IconButton style={{ color: "white" , display: "inline-block"}}>
+ <Box>
+          <IconButton style={{ color: "white" , display: "inline-block"}}>
             <NotificationsActive className="icondel" />
           </IconButton>
 
           <IconButton style={{ color: "white" , display: "inline-block"}}>
             <Chat className="iconMes" />
           </IconButton>
-{currentUser.role==="seller"  ? <Link to="/seller">
-              <Avatar className="Avatar" src={currentUser.image}
-              sx={{display: "inline-block"}}/>
-          </Link>
-          :""
-          }
-          {currentUser.role==="client"?<Link to="/profile">
-              <Avatar className="Avatar" src={currentUser.image}
-              sx={{display: "inline-block"}}/>
-          </Link>:""}
         </Box>
-              
+
+        <Box>
+          <Avatar className="Avatar" src="https://www.nj.com/resizer/zovGSasCaR41h_yUGYHXbVTQW2A=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/SJGKVE5UNVESVCW7BBOHKQCZVE.jpg" sx={{display: "inline-block"}}/>
+        </Box>
       </Toolbar>
     </AppBar>
+    </div>
   );
 }
 

@@ -1,10 +1,10 @@
 'use client'
 import Image from 'next/image'
-import styles from './page.module.css'
+
 import { useEffect, useState } from 'react'
 import { Box, Typography } from '@mui/material';
 import axios from "axios"
-import Card from '../../Components/Card'
+import Card from '../../Components/card/Card'
 import Filter from "../../Components/Filter"
 import ShopCart from '../../Components/ShopCart';
 export default function Home() {
@@ -14,6 +14,7 @@ export default function Home() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [cartItems,setCartItems]=useState<Products[]>([])
   const [totalCost,setTotalCost]=useState<number>(0)
+  
 
   const openCart = ():void => { 
     setIsOpen(true);
@@ -27,9 +28,10 @@ useEffect(() => {
     .then(res=>{
       setProducts(res.data)
       
+      
     })
     .catch(err=>console.error("err"))
-    axios.get<Products[]>(`http://localhost:3001/api/cards/getAll/${21}`)
+    axios.get<Products[]>(`http://localhost:3001/api/cards/getAll/${28}`)
     .then((res)=>{
        
         setCartItems(res.data)
@@ -45,7 +47,7 @@ useEffect(() => {
   //   return null;
   // }
   const addToCart=(productId:number):void=> {
-    axios.post(`http://localhost:3001/api/cards/add/${21}`,{productId})
+    axios.post(`http://localhost:3001/api/cards/add/${28}`,{productId})
     .then(res=>{
       setRefresh(!refresh)
       openCart()
@@ -92,6 +94,14 @@ useEffect(() => {
         console.log(err)
     })
   
+  }
+  const addToCollection=(data:any)=>{
+    console.log("hey",data)
+    axios.post(`http://localhost:3001/api/posts/createPost/${28}`,data)
+    .then((res)=>{
+      console.log("sent" )
+    })
+    .catch(err=>console.log(err))
   }
   return (
     <Box className='allProducts-container' style={{
@@ -151,7 +161,7 @@ useEffect(() => {
             
                           </Box>
             
-                        <Box sx={{
+                        <Box  sx={{
                           display:"flex",
                           gap:"30px",
                           width:"100%",
@@ -160,9 +170,9 @@ useEffect(() => {
                         }}>
                             
                             {products &&products.length!==0?
-                              products.map(item=><Card addToCart={addToCart} key={item.id} item={item}/>):""
+                              products.map(item=><Card   addToCollection={addToCollection} addToCart={addToCart} key={item.id} item={item}/>):""
                             }
-                            {/* <Cart addToCart={addToCart} addToCollection={addToCollection} product={product} key={product.id}/> */}
+                          
                         </Box>
                   </Box>
                 </Box>

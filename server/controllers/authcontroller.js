@@ -145,12 +145,12 @@ module.exports={
                }
     
     },    profile:async(req,res)=>{
-        console.log(req.role)
-        console.log(req.email)
-               if(req.body.role==="client"){
+  
+               if(req.role==="client"){
                 const user=await client.findOne({where:{email:req.email}})
+          
                 return res.json({Status:"success",user})
-               }else if(req.body.role="seller"){
+               }else if(req.role="seller"){
                 const user=await seller.findOne({where:{email:req.email}})
                 return res.json({Status:"success",user})
                }
