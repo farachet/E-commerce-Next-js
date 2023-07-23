@@ -4,6 +4,11 @@ import style from "./page.module.css"
 import { Box, Button,  Avatar , IconButton , Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete'
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import axios  from 'axios';
 
 interface Product {
@@ -23,11 +28,19 @@ HandleEdit : (a:number) => void
 const Products: React.FC<Props>= ({setShow , HandleEdit})  =>  {
 
     const [data, setData] = useState<Product[]>([]);
+    const [open, setOpen] = React.useState(false);
+    const [playSound, setPlaySound] = React.useState(false);
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    }
+  
+    const handleClose = () => {
+      setOpen(false)
+    }
     
 
-    useEffect(() => {
-        fetch();
-      }, []);
+  
 
     const fetch = () => {
         axios
@@ -41,6 +54,11 @@ const Products: React.FC<Props>= ({setShow , HandleEdit})  =>  {
           })
       }
 
+      useEffect(() => {
+        fetch()
+      }, [])
+
+
       const deleteProduct = (id : number) => {
 axios.delete(`http://localhost:3001/api/product/deleteByid/${id}`)
 .then(() => {
@@ -51,7 +69,12 @@ axios.delete(`http://localhost:3001/api/product/deleteByid/${id}`)
 })
   }
 
-
+  const handleDelete = (id: number) => {
+    setPlaySound(true)
+    setTimeout(() => {
+      deleteProduct(id)
+    }, 1000)
+  }
 
 
   return (
@@ -68,7 +91,7 @@ axios.delete(`http://localhost:3001/api/product/deleteByid/${id}`)
           flexDirection: 'column',
           alignItems: 'center',
           gap: '16px',
-          marginLeft : 20
+          marginLeft : 9
         }}
       >
         <Avatar
@@ -106,10 +129,54 @@ axios.delete(`http://localhost:3001/api/product/deleteByid/${id}`)
               
               }} />
           </IconButton>
+
+          <Box>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Time to Part Ways And Let the Glow Go : Farewell Product! 👋"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+          Hey there, brave soul! Are you absolutely, positively, 100% sure you want to bid farewell to this 
+          product and send it into the abyss of oblivion? 🤔 Think twice, for once it's gone, it might stage
+           a digital comeback and haunt your dreams! But hey, if you're resolute, let's give it a one-way ticket 
+           to the cyber afterlife! 🚀💻 Who knows what adventures await it in the great beyond? 🌌🏠
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Nah-uh!🙅‍♂️😆</Button>
+          <Button onClick={() => {
+deleteProduct(el.id)
+ setPlaySound(true)
+            handleClose()
+            
+            }} autoFocus>
+            Brilliant! 👍😄
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+
+          </Box>
           <IconButton aria-label="delete">
-            <DeleteIcon onClick={() => {deleteProduct(el.id)}}/>
+            <DeleteIcon onClick={() => {
+              handleClickOpen()
+              
+              }}/>
           </IconButton>
         </Box>
+        {playSound && (
+                <audio
+                  autoPlay
+                  src="/sound/deleted.wav"
+                  onEnded={() => setPlaySound(false)}
+                />
+              )}
       </Box>
     ))}
     

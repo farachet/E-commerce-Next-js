@@ -1,7 +1,7 @@
 import React, { useState , useEffect } from 'react';
 import "./addProduct.css"
 import { Box, Input, Button, TextField } from "@mui/material";
-import axios, { AxiosResponse } from 'axios';
+import axios  from 'axios';
 
 
 interface Product {
@@ -16,6 +16,7 @@ interface Product {
 const AddProducts: React.FC = () => {
 
   const [productname, setProductname] = useState("")
+  const [data , setData] = useState<Product[]>([])
   const [price, setPrice] = useState("");
   const [reference, setReference] = useState("")
   const [imageUrl, setImageUrl] = useState<string>("")
@@ -23,17 +24,25 @@ const AddProducts: React.FC = () => {
   const [approved, setApproved] = useState(0)
   const [sellerId, setSellerId] = useState(1)
   const [file, setFile] = useState<File | null>(null)
-  const [refresh , setRefrech] = useState(false)
+
+
+
+const fetch = () => {
+    axios
+    .get(`http://localhost:3001/api/product/getAll/1`)
+      .then((res : any) => {
+        console.log(res.data)
+        setData(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 
   useEffect(() => {
-    
+    fetch()
+  },  [])
 
-  },[!refresh])
-
-  const handleRefresh =() => {
-    setRefrech(!refresh)
-    console.log("hello")
-  }
   const AddProduct = () => {
     axios.post("http://localhost:3001/api/product/AddProduct", {
       productname: productname,
@@ -46,7 +55,7 @@ const AddProducts: React.FC = () => {
     })
       .then((res: any) => {
         console.log(res.data);
-        handleRefresh()
+       fetch()
       })
       .catch(err => {
         console.log(err);
@@ -92,6 +101,7 @@ const AddProducts: React.FC = () => {
             borderRadius: 10,
           }}
         >
+          <Box  sx={{color : "white" , width : "100%" }}>Add New product</Box>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <TextField
               value={productname}
@@ -124,7 +134,6 @@ const AddProducts: React.FC = () => {
               style={{
                 right:"20px",
                 bottom:"27%",
-                
                 padding:"10px",
                 borderRadius:"15px",
 
@@ -160,8 +169,6 @@ const AddProducts: React.FC = () => {
             <Button
               onClick={() => { 
                 AddProduct()
-                handleRefresh()
-              
               }}
               variant="contained"
               style={{  right:"20px",

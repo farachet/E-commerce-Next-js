@@ -19,6 +19,20 @@ module.exports= {
         )
     },
 
+    updateSellerImage:(req,res)=>{
+      const Updated = {
+          image: req.body.image,
+          
+        }
+      seller.update(Updated , {where:{id:req.params.id}})
+      .then(result =>
+       res.status(201).json(result)
+       )
+      .catch(error=> 
+      res.status(500).json(error)
+      )
+  },
+
    getOneByid : (req,res) => {
         seller.findAll({where : {id : req.params.id } })
           .then((result) => {
