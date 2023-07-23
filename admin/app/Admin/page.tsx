@@ -19,6 +19,9 @@ import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 
+import CategoryIcon from '@mui/icons-material/Category';
+
+
 
 const drawerWidth = 240;
 
@@ -41,6 +44,7 @@ export default function ResponsiveDrawer(props: Props) {
 
   const drawer = (
     <div >
+
     <div >
     <Toolbar  />
     <Divider />
@@ -77,6 +81,17 @@ export default function ResponsiveDrawer(props: Props) {
           <ListItemText primary="Requests" />
         </ListItemButton>
       </ListItem>
+
+      <ListItem key="Products" disablePadding>
+        <ListItemButton component="a" href="/Admin/Products"> 
+          <ListItemIcon>
+          {<CategoryIcon/>}
+          </ListItemIcon>
+         
+          <ListItemText primary="Products" />
+        </ListItemButton>
+      </ListItem>
+
     </List>
     <Divider />
   </div>
@@ -86,6 +101,9 @@ export default function ResponsiveDrawer(props: Props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
+
+    <div>
+
     <Box  sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar
@@ -149,10 +167,18 @@ export default function ResponsiveDrawer(props: Props) {
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
-   
+
+        <Typography paragraph style={{ fontSize: '60px' ,color:'white',marginLeft:'450px',marginTop:'200px'}}>
+          Welcome To Your Dashboard
+</Typography>
+
 
 
       </Box>
     </Box>
+
+    
+    </div>
+
   );
 }

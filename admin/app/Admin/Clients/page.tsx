@@ -5,6 +5,9 @@ import axios from 'axios';
 import { Button } from '@mui/material';
 import styles from '../Requests/style.module.css';
 
+import ResponsiveDrawer from '../page';
+
+
 interface ClientData {
   id: number;
   firstName: string;
@@ -75,6 +78,11 @@ const ManageClient: React.FC = () => {
   }, [refrech]);
 
   return (
+    <div>
+      <ResponsiveDrawer Collection={{
+        name: '',
+        image: ''
+      }} id={0} categoryname={''} image={''} Stock={0}/>
     <div className={styles.back}>
       <div className={styles.tableheader}>List of Clients</div>
       <div className={styles.tablecontainer}>
@@ -88,6 +96,9 @@ const ManageClient: React.FC = () => {
         />
       </div>
     </div>
+
+    </div>
+
   );
 };
 

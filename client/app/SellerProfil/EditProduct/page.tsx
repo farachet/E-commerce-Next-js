@@ -17,7 +17,7 @@ const Edit  : React.FC<Props> = ({UpdateProduct , setShow ,  Editt }) => {
   console.log( "updateP " , UpdateProduct)
 
 
-
+    const [open, setOpen] = React.useState(false)
     const [productname, setProductname] = useState<string>("");
     const [price, setPrice] = useState<string>("");
     const [reference, setReference] = useState<string>("");
@@ -25,6 +25,16 @@ const Edit  : React.FC<Props> = ({UpdateProduct , setShow ,  Editt }) => {
     const [status, setStatus] = useState<string>("");
     const [approved, setApproved] = useState<number>(0);
     const [sellerId, setSellerId] = useState<number>(1);
+
+
+    
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
 
   return (
@@ -44,6 +54,7 @@ const Edit  : React.FC<Props> = ({UpdateProduct , setShow ,  Editt }) => {
         >
 
         <Box sx={{display:"flex",flexDirection:"column"}}>
+          
             <TextField 
               value={productname}
               onChange={(event) => setProductname(event.target.value)}

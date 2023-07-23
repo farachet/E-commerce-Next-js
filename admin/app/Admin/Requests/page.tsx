@@ -4,6 +4,7 @@ import { Button } from '@mui/material';
 import axios from 'axios';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import styles from './style.module.css'
+import ResponsiveDrawer from '../page';
 
 interface Product {
   id: number;
@@ -59,7 +60,7 @@ const Page = () => {
   ];
   const handleUpdate = async (id:Number) => { 
     try{
-      const response= await axios.put(`http://localhost:3002/api/admin/updateProds/${id}`)
+      const response= await axios.put(`http://localhost:3001/api/admin/updateProds/${id}`)
       if (response.status===200){
         setrefrech(!refrech)  
       } 
@@ -72,7 +73,7 @@ const Page = () => {
   useEffect(() => {
     const fetchProds = async () => {
       try {
-        const response = await axios.get("http://localhost:3002/api/admin/allprods");
+        const response = await axios.get("http://localhost:3001/api/admin/allprods");
         console.log(response.data);
 
         const convertedRows = response.data.map((ele: any) => ({
@@ -107,6 +108,11 @@ const Page = () => {
   
 
   return (
+    <div>
+      <ResponsiveDrawer Collection={{
+        name: '',
+        image: ''
+      }} id={0} categoryname={''} image={''} Stock={0}  />
     <div className={styles.back} >
     <div className={styles.tableheader}>List of Requests</div>
     <div className={styles.tablecontainer}>
@@ -123,7 +129,7 @@ const Page = () => {
       />
     </div>
      
-   
+    </div>
      </div> 
   );
 };
