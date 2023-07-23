@@ -9,26 +9,20 @@ const Client = () => {
   const {user}=useContext(ecommerceContext)
   const [posts, setPost] = useState<Posts[]>([]);
   const [refresh, setRefresh] = useState<boolean>(false);
-  const [user, setUser] = useState<any>({});
+  
   const handleRefresh = (): void => {
     setRefresh(!refresh);
   };
   useEffect(() => {
     axios
-      .get<Posts[]>(`http://localhost:3001/api/posts/allUserPosts/${28}`)
+      .get<Posts[]>(`http://localhost:3001/api/posts/allUserPosts/${user.id}`)
       .then((res) => setPost(res.data))
       .catch((err) => console.error(err));
-    axios
-      .get<User[]>(`http://localhost:3001/api/client/getClient/${28}`)
-      .then((res) => {
-        console.log("data", res.data);
-        setUser(res.data[0]);
-      })
-      .catch((err) => console.log(err));
+
   }, [refresh]);
   const addPost = (post: Posts): void => {
     axios
-      .post(`http://localhost:3001/api/posts/createPost/${28}`, post)
+      .post(`http://localhost:3001/api/posts/createPost/${user.id}`, post)
       .then((res) => {
         handleRefresh();
       })

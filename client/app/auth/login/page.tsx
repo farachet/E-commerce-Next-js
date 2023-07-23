@@ -1,6 +1,6 @@
 
 'use client'
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import styles from './page.module.css'
 import { Box, Button , appBarClasses , Avatar , Input, Select, MenuItem } from "@mui/material";
 import TextField from '@mui/material/TextField';
@@ -15,7 +15,7 @@ import IconButton from "@mui/material/IconButton";
 import Link from 'next/link'
 import axios from 'axios';
 // import {ecommerceContext} from "../../ecommerceContext/e-commerceContext"
-
+import { ecommerceContext } from '@/app/Context/ecommerce';
 interface Props{
   email: string;
   password:string;
@@ -23,7 +23,7 @@ interface Props{
 }
 
 const Login: React.FC <Props> = () => {
-    // const {handleUser,currentUser}=useContext(ecommerceContext)
+    const {handleRefreshContext}=useContext(ecommerceContext)
     const [show , setShow] = useState(false)
     const [email,setEmail]= useState ("")
     const [password,setPassword]= useState ("")
@@ -56,8 +56,9 @@ const Login: React.FC <Props> = () => {
     
         if(res.data.acsessToken){
           // handleUser(res.data.existUser)
-          router.push("/Home")
-         console.log(res.data)
+          handleRefreshContext()
+          router.push("/")
+          
         }else{
           console.log("home")
            alert("invalid username or password")

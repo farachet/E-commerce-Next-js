@@ -36,6 +36,5 @@ interface Posts{
 interface Edit{
   firstName: string,
   lastName: string,
-  email: string,
   birthday: string,
 }
