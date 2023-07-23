@@ -1,6 +1,6 @@
 //  i will write comments to make it easy for me to find code 
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { Container, Box, Typography, TextField } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import style from "./page.module.css";
@@ -13,6 +13,7 @@ import DialogContent from "@mui/material/DialogContent";
 
 import DialogTitle from "@mui/material/DialogTitle";
 import axios from "axios";
+import { ecommerceContext } from "@/app/Context/ecommerce";
 
 interface seller {
   id: number;
@@ -23,7 +24,8 @@ interface seller {
 }
 
 const Profil = () => {
-
+  const {user}=useContext(ecommerceContext) //user
+  console.log("currrentUser",user)
   const [open, setOpen] = React.useState(false);
   const [openPic, setOpenPic] = useState<boolean>(false);
   const [openCover, setOpenCover] = useState<boolean>(false);
