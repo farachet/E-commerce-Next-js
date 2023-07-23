@@ -14,7 +14,7 @@ module.exports = {
       status: "active",
       approved: 0,
       sellerId: req.body.sellerId,
-      categoryId:req.body.category
+      categoryId:req.body.categoryId
       
       
     })

@@ -27,7 +27,8 @@ export default function Home() {
 useEffect(() => {
     axios.get<Products[]>(`http://localhost:3001/api/product/getAllProducts`)
     .then(res=>{
-      setProducts(res.data)
+      const filteredProducts=res.data.filter(item=>item.status==="active")
+      setProducts(filteredProducts)
       
       
     })
@@ -102,6 +103,19 @@ useEffect(() => {
     })
     .catch(err=>console.log(err))
   }
+  const handleCheckout=()=>{
+    axios.put(`http://localhost:3001/api/product/updateStatus/${user.id}`)
+    .then(res=>{
+      setRefresh(!refresh)
+      axios.delete(`http://localhost:3001/api/cards/deleteAll/${user.id}`)
+    .then(()=>{
+      setRefresh(!refresh)
+    })
+    .catch((err)=>console.error(err))
+
+    })
+    .catch(err=>console.error(err))
+  }
   return (
     <Box className='allProducts-container' style={{
                   margin:"200px 40px ",
@@ -112,7 +126,7 @@ useEffect(() => {
             
                 }}>
                    
-                  <ShopCart  totalCost={totalCost} cartItems={cartItems} openCart={openCart} closeCart={closeCart} isOpen={isOpen} handleDeleteFromCart={handleDeleteFromCart} />
+                  <ShopCart handleCheckout={handleCheckout}  totalCost={totalCost} cartItems={cartItems} openCart={openCart} closeCart={closeCart} isOpen={isOpen} handleDeleteFromCart={handleDeleteFromCart} />
                   <Box sx={{
                     width:"20%",
                     backgroundColor:"rgba(255, 255, 255, 0.1)",

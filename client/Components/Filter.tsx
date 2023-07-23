@@ -77,10 +77,10 @@ const Filter:React.FC<Props> = ({handleFilterPrice,handleFilterCategory}) => {
             >
                
                 <MenuItem value={1000000}>All Items</MenuItem>
-                <MenuItem value={10}>Less than $10</MenuItem>
-                <MenuItem value={20}>Less than $20</MenuItem>
-                <MenuItem value={30}>less than $30</MenuItem>
-                <MenuItem value={100}>less than $100</MenuItem>
+                <MenuItem value={100}>Less than $100</MenuItem>
+                <MenuItem value={200}>Less than $200</MenuItem>
+                <MenuItem value={300}>less than $300</MenuItem>
+                <MenuItem value={400}>less than $400</MenuItem>
            </Select>
     </FormControl>
             <FormControl 
@@ -113,9 +113,9 @@ const Filter:React.FC<Props> = ({handleFilterPrice,handleFilterCategory}) => {
               }}
             >
                 <MenuItem value={0}>all Category</MenuItem>
-                <MenuItem value={1}>Category 1</MenuItem>
-                <MenuItem value={2}>Twenty</MenuItem>
-                <MenuItem value={3}>Thirty</MenuItem>
+                <MenuItem value={1}>sbabet 1</MenuItem>
+                <MenuItem value={2}>black</MenuItem>
+                <MenuItem value={3}>white</MenuItem>
            </Select>
     </FormControl>
     </div>

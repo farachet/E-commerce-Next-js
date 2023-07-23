@@ -93,7 +93,7 @@ const handleCloseCover = () => {
     email: string
   ) => {
     axios
-      .put(`http://localhost:3001/api/seller/Update/1`, {
+      .put(`http://localhost:3001/api/seller/Update/${user.id}`, {
         firstName: firstName,
         lastName: lastName,
         email: email,
@@ -127,7 +127,7 @@ const handleCloseCover = () => {
   }
 
   const UpdateImage = () => {
-    axios.put("http://localhost:3001/api/seller/UpdateImage/1", {
+    axios.put(`http://localhost:3001/api/seller/UpdateImage/${user.id}`, {
   
       image: imageUrl,
      
@@ -196,8 +196,8 @@ const handleCloseCover = () => {
             <ModeEditOutlineIcon style={{ color: "white" }} onClick={handleClickOpenCover} />
           </Box>
 
-          {data.map((el) => (
-            <Box key={el.id}>
+          
+            <Box key={user.id}>
               <Box
                 sx={{
                   width: 120,
@@ -212,7 +212,7 @@ const handleCloseCover = () => {
               >
                 <Avatar
                   alt="profile"
-                  src={el.image}
+                  src={user.image}
                   sx={{ width: "100%", height: "100%" }}
                 />
 
@@ -240,7 +240,7 @@ const handleCloseCover = () => {
                       variant="h4"
                       sx={{ color: "white", width: "max-content"  }}
                     >
-                      {el.firstName} {el.lastName}  <Avatar
+                      {user.firstName} {user.lastName}  <Avatar
                 src="https://cdn-icons-png.flaticon.com/128/6520/6520110.png"
                 style={{ width: 20, height: 20 , marginLeft : 175  , marginTop : -30}}
               ></Avatar>
@@ -258,13 +258,13 @@ const handleCloseCover = () => {
                         fontSize: 18,
                       }}
                     >
-                      {el.email}
+                      {user.email}
                     </Typography>
                   </Box>
                 </Box>
               </Box>
             </Box>
-          ))}
+        
 
           <Button
             className={style.editbtn}
