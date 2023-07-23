@@ -18,10 +18,12 @@ const ShopCart:React.FC<Props> = ({openCart,isOpen,closeCart,totalCost,cartItems
   return (
     <>
   <ShoppingCartRoundedIcon onClick={openCart} sx={{
+      
     position: "absolute",
-    right: "16%",
-    top: "22px",
+    right: "21%",
+    top: "11px",
     color: "white",
+    fontSize:"49px",
     cursor: "pointer"
   }}/>
   <Drawer anchor="right" open={isOpen} onClose={closeCart}
@@ -110,7 +112,7 @@ const ShopCart:React.FC<Props> = ({openCart,isOpen,closeCart,totalCost,cartItems
       </Typography>
     </div>
     <Button
-    // onClick={()=>handleCheckout(1)}
+    
     className='checkout-btn'
         sx={{
           color:"white",

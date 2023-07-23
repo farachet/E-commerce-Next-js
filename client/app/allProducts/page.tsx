@@ -1,14 +1,15 @@
 'use client'
-import Image from 'next/image'
 
-import { useEffect, useState } from 'react'
+
+import { useContext, useEffect, useState } from 'react'
 import { Box, Typography } from '@mui/material';
 import axios from "axios"
 import Card from '../../Components/card/Card'
 import Filter from "../../Components/Filter"
 import ShopCart from '../../Components/ShopCart';
+import { ecommerceContext } from '../Context/ecommerce';
 export default function Home() {
-
+  const {user}=useContext(ecommerceContext)
   const [refresh, setRefresh] = useState<boolean>(false);
   const [products,setProducts]=useState<Products[]>([])
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -31,7 +32,7 @@ useEffect(() => {
       
     })
     .catch(err=>console.error("err"))
-    axios.get<Products[]>(`http://localhost:3001/api/cards/getAll/${28}`)
+    axios.get<Products[]>(`http://localhost:3001/api/cards/getAll/${user.id}`)
     .then((res)=>{
        
         setCartItems(res.data)
@@ -43,11 +44,9 @@ useEffect(() => {
         console.log(err)
     })
   }, [refresh]);
-  // if (!cartItems) {
-  //   return null;
-  // }
+
   const addToCart=(productId:number):void=> {
-    axios.post(`http://localhost:3001/api/cards/add/${28}`,{productId})
+    axios.post(`http://localhost:3001/api/cards/add/${user.id}`,{productId})
     .then(res=>{
       setRefresh(!refresh)
       openCart()
@@ -97,7 +96,7 @@ useEffect(() => {
   }
   const addToCollection=(data:any)=>{
     console.log("hey",data)
-    axios.post(`http://localhost:3001/api/posts/createPost/${28}`,data)
+    axios.post(`http://localhost:3001/api/posts/createPost/${user.id}`,data)
     .then((res)=>{
       console.log("sent" )
     })
@@ -112,7 +111,7 @@ useEffect(() => {
                   gap:"3%"
             
                 }}>
-                   {/* handleDeleteFromCart={handleDeleteFromCart} cartItems={cartItems} openCart={openCart} closeCart={closeCart} isOpen={isOpen} */}
+                   
                   <ShopCart  totalCost={totalCost} cartItems={cartItems} openCart={openCart} closeCart={closeCart} isOpen={isOpen} handleDeleteFromCart={handleDeleteFromCart} />
                   <Box sx={{
                     width:"20%",
@@ -123,7 +122,7 @@ useEffect(() => {
             
                   }}>
                     <Filter handleFilterCategory={handleFilterCategory} handleFilterPrice={handleFilterPrice}/>
-                    {/* <Filter handleFilterPrice={handleFilterPrice} handleFilterCategory={handleFilterCategory}/>    */}
+                   
             
             
                   </Box>
@@ -157,7 +156,7 @@ useEffect(() => {
                             >
                               {products.length} items
                             </Typography>
-                            {/* <CardsFilter/> */}
+                       
             
                           </Box>
             

@@ -1,5 +1,5 @@
 "use client";
-import React, {  useState, ChangeEvent } from "react";
+import React, {  useState, ChangeEvent,useContext } from "react";
 import "./ClientHeader.css";
 import { Container, Box, Typography, TextField } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
@@ -12,19 +12,21 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import axios from "axios";
 import Loading from "../Loading/Loading";
+import { ecommerceContext } from "@/app/Context/ecommerce";
 type Props = {
   user: User;
   handleRefresh: () => void;
 };
 const ClientHeader: React.FC<Props> = ({ user, handleRefresh }) => {
+  const {handleRefreshContext}=useContext(ecommerceContext)
   const [open, setOpen] = useState<boolean>(false);
   const [prictureOpen, setPictureOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [updatedCover,setCover]=useState<boolean>(false)
+
   const [profileData, setProfileData] = useState<Edit>({
     firstName: "",
     lastName: "",
-    email: "",
+
     birthday: "",
   });
 
@@ -58,10 +60,7 @@ const ClientHeader: React.FC<Props> = ({ user, handleRefresh }) => {
   const handleClose = (): void => {
     setOpen(false);
   };
-  //   // const  birthday = profileData.birthday.split('/').sort((a, b) => b - a).reduce((acc,current) => {
 
-  //   //   acc+current
-  //   // },"");
 
   const handleSave = (): void => {
     let inputBirthDay = profileData.birthday;
@@ -76,15 +75,15 @@ const ClientHeader: React.FC<Props> = ({ user, handleRefresh }) => {
       birthday += birthDayArray.split(",")[i] + "-";
     }
     axios
-      .put(`http://localhost:3001/api/client/edit/${28}`, {
+      .put(`http://localhost:3001/api/client/edit/${user.id}`, {
         firstName: profileData.firstName,
         lastName: profileData.lastName,
-        email: profileData.email,
         birthday: birthday.slice(1, birthday.length - 1),
       })
       .then((result) => {
         handleClosee();
         handleRefresh();
+        handleRefreshContext()
       })
       .catch((err) => console.error(err));
 
@@ -95,7 +94,10 @@ const ClientHeader: React.FC<Props> = ({ user, handleRefresh }) => {
       .put<User>(`http://localhost:3001/api/client/edit/${user.id}`, {
         image: imageUrl,
       })
-      .then((res) => handleRefresh())
+      .then((res) => {
+        handleRefresh()
+        handleRefreshContext()
+      })
       .catch((err) => console.error(err));
   };
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -105,14 +107,7 @@ const ClientHeader: React.FC<Props> = ({ user, handleRefresh }) => {
       [name]: value,
     }));
   };
-  const handleCover=()=>{
-    axios
-    .put<User>(`http://localhost:3001/api/client/edit/${user.id}`, {
-      cover: imageUrl,
-    })
-    .then((res) => handleRefresh())
-    .catch((err) => console.error(err));
-  }
+
   return (
     <Container className="Header-container">
       <Box>
@@ -126,10 +121,7 @@ const ClientHeader: React.FC<Props> = ({ user, handleRefresh }) => {
             height: 375,
           }}
         />
-        <Box onClick={()=>{
-          setCover(true)
-          handleOpenn()
-        }} className="icon-container">
+        <Box className="icon-container">
           <ModeEditOutlineIcon style={{ color: "white" }} />
         </Box>
         <Box
@@ -228,14 +220,7 @@ const ClientHeader: React.FC<Props> = ({ user, handleRefresh }) => {
                   onChange={handleChange}
                   margin="normal"
                 />
-                <TextField
-                  name="email"
-                  label="Email"
-                  fullWidth
-                  value={profileData.email}
-                  onChange={handleChange}
-                  margin="normal"
-                />
+
                 <TextField
                   name="birthday"
                   label="Birthday"
