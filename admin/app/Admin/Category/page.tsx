@@ -10,8 +10,6 @@ import "../Category/admin.css"
 import ResponsiveDrawer from "../page";
 
 
-
-
 interface Category {
   Collection: { name: string; image: string };
   id: number;
@@ -93,7 +91,7 @@ const Admin: React.FC = () => {
       const response = await axios.get(
         "http://localhost:3001/api/admin/allcategories"
       );
-      const categoriesData: Category[] = response.data; // Make sure the response data matches the Category interface
+      const categoriesData: Category[] = response.data; 
 console.log(response.data);
 
       setCategories(categoriesData);
@@ -119,7 +117,7 @@ console.log(response.data);
           image: imageUrl,
         }
       );
-      const newCategoryData: Category = response.data; // Make sure the response data matches the Category interface
+      const newCategoryData: Category = response.data; 
       console.log('aaaass',response.data);
       
       const newData: Category = {
@@ -152,14 +150,12 @@ console.log(response.data);
 
   return (
     <div className="body">
-
 <ResponsiveDrawer Collection={{
         name: "",
         image: ""
       }} id={0} categoryname={""} image={""} Stock={0}/>
-<div style={{width:50,color:"blue",fontSize:40,fontWeight:'bold',marginLeft:700}}> List Categories</div>
-
-      <Box sx={{ height: 400, width: "50%", marginTop: 5, marginLeft: 40 ,backgroundColor:'grey'}}>
+<div style={{color:"white",fontSize:20,fontWeight:'bold',marginLeft:850}}> List Categories</div>
+      <Box sx={{ height: 400, width: "50%", marginTop: 5, marginLeft: 60 ,backgroundColor:'grey'}}>
   
         <DataGrid
           className="custom-datagrid"
@@ -212,6 +208,11 @@ console.log(response.data);
                 variant="standard"
                 value={newCategory}
                 onChange={(e) => setNewCategory(e.target.value)}
+                InputProps={{
+                  style: {
+                    color: 'white',
+                  },
+                }}
               />
               <div>
 <input
@@ -238,105 +239,7 @@ console.log(response.data);
             </div>
           </Box>
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-around",
-          }}
-        >
-          <Box
-            sx={{
-              width: 300,
-              height: 300,
-              backgroundColor: "rgba(0, 0, 0, 0)",
-              "&:hover": {
-                backgroundColor: "primary.main",
-              },
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              textAlign: "center",
-            }}
-          >
-            <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2F99designs.com%2Finspiration%2Flogos%2Flamp&psig=AOvVaw3Pg6yoCeOgEuAEaLSwNU7r&ust=1689949880637000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCPjN74TAnYADFQAAAAAdAAAAABAR" alt="Logo" />
-            <Typography variant="h6" color="text.primary">
-              Your Text Here
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              width: 300,
-              height: 300,
-              backgroundColor: "rgba(0, 0, 0, 0)",
-              "&:hover": {
-                backgroundColor: "primary.main",
-              },
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              textAlign: "center",
-            }}
-          >
-            <Typography variant="h4" className="about">
-              About
-            </Typography>
-            <Typography variant="h6" className="about">
-              Product <br />
-              Resource <br />
-              Term & condition <br />
-              FAQ
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              width: 300,
-              height: 300,
-              backgroundColor: "rgba(0, 0, 0, 0)",
-              "&:hover": {
-                backgroundColor: "primary.main",
-              },
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              textAlign: "center",
-            }}
-          >
-            <Typography variant="h4" className="about">
-              Company
-            </Typography>
-            <Typography variant="h6" className="about">
-              Our Team <br /> Partner With Us <br />
-              Privacy & Policy <br />
-              Features
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              width: 300,
-              height: 300,
-              backgroundColor: "rgba(0, 0, 0, 0)",
-              "&:hover": {
-                backgroundColor: "primary.main",
-              },
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              textAlign: "center",
-            }}
-          >
-            <Typography variant="h4" className="about">
-              Contact
-            </Typography>
-            <Typography variant="h6" className="about">
-              Tel : 90 117 343 <br /> Email: Farachet@gmail.com
-            </Typography>
-          </Box>
-        </Box>
+       
       </footer>
     </div>
   );

@@ -4,9 +4,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import axios from 'axios';
 import { Button } from '@mui/material';
 import styles from '../Requests/style.module.css';
-
 import ResponsiveDrawer from '../page';
-
 
 interface ClientData {
   id: number;
@@ -43,7 +41,7 @@ const ManageClient: React.FC = () => {
 
   const deleteData = async (id: number) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/api/client/delete/${id}`);
+      const response = await axios.delete(`http://localhost:3001/api/admin/deleteClient/${id}`);
       console.log(id);
 
       if (response.status === 200) {
@@ -58,7 +56,7 @@ const ManageClient: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/client/getClient');
+        const response = await axios.get('http://localhost:3001/api/admin/AllClients');
         console.log(response.data);
 
         const convertedRows: ClientData[] = response.data.map((ele: any) => ({
@@ -89,16 +87,14 @@ const ManageClient: React.FC = () => {
         <DataGrid
           rows={rows}
           columns={columnsClient}
-          pageSize={5}
-          rowsPerPageOptions={[5, 10]}
+        //  pageSize={5}
+       //   rowsPerPageOptions={[5, 10]}
           checkboxSelection={false}
-          disableSelectionOnClick
+       //   disableSelectionOnClick
         />
       </div>
     </div>
-
     </div>
-
   );
 };
 
