@@ -5,10 +5,11 @@ import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import moment, { min } from "moment";
 type Props = {
   posts: Posts[];
-  deletePost: (postId: number) => void;
+  deletePost: (postId: number) => void|null;
+  style:any
 };
 
-const ClientPosts: React.FC<Props> = ({ posts, deletePost }) => {
+const ClientPosts: React.FC<Props> = ({ posts, deletePost ,style}) => {
   console.log("pos", posts);
   if (!posts) {
     return null;
@@ -110,7 +111,7 @@ const ClientPosts: React.FC<Props> = ({ posts, deletePost }) => {
               <Avatar
                 src={ele.image}
                 sx={{ width: "100%", height: "426px", borderRadius: "0px" }}
-                // style={style?style:{height:"426px"}}
+                style={style?style:{height:"426px"}}
               />
             </Box>
           </Container>

@@ -15,7 +15,7 @@ export default function Home() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [cartItems,setCartItems]=useState<Products[]>([])
   const [totalCost,setTotalCost]=useState<number>(0)
-  
+  const [allCat,setAllCat]=useState<category[]>([])
 
   const openCart = ():void => { 
     setIsOpen(true);
@@ -25,9 +25,10 @@ export default function Home() {
     setIsOpen(false);
   };
 useEffect(() => {
+  getCategories()
     axios.get<Products[]>(`http://localhost:3001/api/product/getAllProducts`)
     .then(res=>{
-      const filteredProducts=res.data.filter(item=>item.status==="active")
+      const filteredProducts=res.data.filter(item=>item.status==="active"&&item.approved)
       setProducts(filteredProducts)
       
       
@@ -45,7 +46,11 @@ useEffect(() => {
         console.log(err)
     })
   }, [refresh]);
-
+  const getCategories=()=>{
+    axios.get(`http://localhost:3001/api/admin/allcategories`)
+    .then(res=>setAllCat(res.data))
+    .catch(err=>console.log(err))
+  }
   const addToCart=(productId:number):void=> {
     axios.post(`http://localhost:3001/api/cards/add/${user.id}`,{productId})
     .then(res=>{
@@ -140,7 +145,7 @@ useEffect(() => {
                     
             
                   }}>
-                    <Filter handleFilterCategory={handleFilterCategory} handleFilterPrice={handleFilterPrice}/>
+                    <Filter  allCat={allCat} handleFilterCategory={handleFilterCategory} handleFilterPrice={handleFilterPrice}/>
                    
             
             

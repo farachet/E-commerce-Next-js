@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Button, Avatar } from '@mui/material';
 
-import './AboutUs.css';
+import './aboutUs.css';
 
 const AboutUs = () => {
   return (

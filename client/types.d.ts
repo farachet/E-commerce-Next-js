@@ -13,7 +13,8 @@ interface Products{
     sellerId:number,
     status:string,
     categoryId:number,
-    category:category
+    category:category,
+    approved:number
 }
 interface User {
   id?: number,

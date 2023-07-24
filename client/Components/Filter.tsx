@@ -4,12 +4,14 @@ import { SelectChangeEvent } from "@mui/material";
 import React,{useState,ChangeEventHandler,ChangeEvent} from 'react'
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import { Container,Box,Typography, FormControl, InputLabel, Select, MenuItem} from '@mui/material'
+import { Carter_One } from "next/font/google";
 type Props={
   handleFilterPrice:(price:number)=>void
   handleFilterCategory:(query:number)=>void
+  allCat:category[]
 }
 
-const Filter:React.FC<Props> = ({handleFilterPrice,handleFilterCategory}) => {
+const Filter:React.FC<Props> = ({handleFilterPrice,handleFilterCategory,allCat}) => {
   // const [selectedPrice, setSelectedPrice] = useState<number>(1000000);
   // const [selectedCategory, setSelectedCategory] = useState<number>(0);
 
@@ -113,9 +115,12 @@ const Filter:React.FC<Props> = ({handleFilterPrice,handleFilterCategory}) => {
               }}
             >
                 <MenuItem value={0}>all Category</MenuItem>
-                <MenuItem value={1}>sbabet 1</MenuItem>
+                {/* <MenuItem value={1}>sbabet 1</MenuItem>
                 <MenuItem value={2}>black</MenuItem>
-                <MenuItem value={3}>white</MenuItem>
+                <MenuItem value={3}>white</MenuItem> */}
+                {allCat.map(cat=>(
+                  <MenuItem value={cat.id}>{cat.categoryname}</MenuItem>
+                ))}
            </Select>
     </FormControl>
     </div>

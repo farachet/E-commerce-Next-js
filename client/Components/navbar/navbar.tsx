@@ -83,7 +83,7 @@ function Navbar() {
           ) : (
             ""
           )}
-          <Link href="/aboutus">
+          <Link href="/AboutUs">
             <Typography
               className="personal-collection"
               style={{ display: "inline-block" }}
