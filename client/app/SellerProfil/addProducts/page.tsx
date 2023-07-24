@@ -1,3 +1,5 @@
+"use client"
+import { SelectChangeEvent } from "@mui/material";
 import React, { useState , useEffect , useContext } from 'react';
 import "./addProduct.css"
 import { Box, Input, Button, TextField } from "@mui/material";
@@ -16,57 +18,49 @@ interface Product {
 }
 
 const AddProducts: React.FC = () => {
-  const {user}=useContext(ecommerceContext)
+  const {user,handleAddProduct}=useContext(ecommerceContext)
   const [productname, setProductname] = useState("")
   const [data , setData] = useState<Product[]>([])
   const [price, setPrice] = useState("");
   const [reference, setReference] = useState("")
   const [imageUrl, setImageUrl] = useState<string>("")
-  const [status, setStatus] = useState("")
-  const [approved, setApproved] = useState(0)
   const [file, setFile] = useState<File | null>(null)
-  const [categoryId , setCategoryId] = useState<number>(0)
   const [allCat,setAllCat]=useState<category[]>([])
+  const [selectedCategory,setCategory]=useState<number|null>(null)
+  const handleCategoryChange = (event: SelectChangeEvent<unknown>):void => {
 
+    setCategory(event.target.value as number)
+  };
 
   useEffect(() => {
-    fetch()
+    // fetch()
     getCategories()
   },  [])
 
  
 
-const fetch = () => {
-    axios
-    .get(`http://localhost:3001/api/product/getAll/${user.id}`)
-      .then((res : any) => {
-        console.log(res.data)
-        setData(res.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+
   const getCategories=()=>{
     axios.get(`http://localhost:3001/api/admin/allcategories`)
     .then(res=>setAllCat(res.data))
     .catch(err=>console.log(err))
   }
 
-
+console.log("5 taw",allCat)
   const AddProduct = () => {
     axios.post("http://localhost:3001/api/product/AddProduct", {
       productname: productname,
       price: price,
       reference: reference,
       image: imageUrl,
-      status: status,
-      approved: approved,
-      sellerId: user.id
+      status: "active",
+      approved: 0,
+      sellerId: user.id,
+      categoryId:selectedCategory
     })
       .then((res: any) => {
-        console.log(res.data);
-       fetch()
+        handleAddProduct()
+      //  fetch()
       })
       .catch(err => {
         console.log(err);
@@ -134,8 +128,8 @@ const fetch = () => {
                         Categories
                       </InputLabel>
             <Select
-              
-              
+              onChange={handleCategoryChange}
+              value={selectedCategory}
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               sx={{
@@ -143,10 +137,10 @@ const fetch = () => {
   
               }}
             >
-                <MenuItem value={0}>all Category</MenuItem>
-                <MenuItem value={1}>sbabet 1</MenuItem>
-                <MenuItem value={2}>black</MenuItem>
-                <MenuItem value={3}>white</MenuItem>
+    
+                {allCat.map(cat=>(
+                  <MenuItem value={cat.id}>{cat.categoryname}</MenuItem>
+                ))}
            </Select>
     </FormControl>
             <TextField
@@ -204,13 +198,7 @@ const fetch = () => {
               Upload
             </Button>
 
-            <TextField
-              value={status}
-              onChange={(event) => setStatus(event.target.value)}
-              label={'Type product status'}
-              id="margin-dense"
-              margin="dense"
-            />
+            
 
             <Button
               onClick={() => { 

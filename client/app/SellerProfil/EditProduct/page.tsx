@@ -13,7 +13,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import axios from "axios"
 
 type Props ={
-  UpdateProduct : (a:number , b: string , c: number , d : string , e : string , f : string) => void
+  UpdateProduct : (a:number , b: string , c: number , d : string , f : string) => void
   Editt : number
   setOpenEdit: (a: boolean) => void;
   }
@@ -27,35 +27,33 @@ const Edit  : React.FC<Props> = ({UpdateProduct ,  Editt , setOpenEdit }) => {
     const [productname, setProductname] = useState<string>("");
     const [price, setPrice] = useState<string>("");
     const [reference, setReference] = useState<string>("");
-    const [image, setImage] = useState<string>("");
-    const [status, setStatus] = useState<string>("");
-    const [approved, setApproved] = useState<number>(0);
-    const [sellerId, setSellerId] = useState<number>(1);
-    const [products, setProducts] = useState([]);
 
-    useEffect(() => {
-      fetchData()
-      console.log("it works")
-    }, [])
+    const [status, setStatus] = useState<string>("");
+  
+
+    // useEffect(() => {
+    //   fetchData()
+    //   console.log("it works")
+    // }, [])
     
     
-    const fetchData = () => {
-      axios.get(`http://localhost:3001/api/product/getAll/1`)
-        .then((res) => {
-          console.log(res.data)
-          console.log("hello")
-          setProducts(res.data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    }
+    // const fetchData = () => {
+    //   axios.get(`http://localhost:3001/api/product/getAll/1`)
+    //     .then((res) => {
+    //       console.log(res.data)
+    //       console.log("hello")
+    //       setProducts(res.data)
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //     })
+    // }
     
     
 
     const handleCloseEdit = () => {
       setOpenEdit(false)
-      fetchData()
+      // fetchData()
       
     }
       
@@ -107,17 +105,7 @@ const Edit  : React.FC<Props> = ({UpdateProduct ,  Editt , setOpenEdit }) => {
         value={reference}
         onChange={(event) => setReference(event.target.value)}
       />
-        <TextField
-        autoFocus
-        margin="dense"
-        id="name"
-        label="image"
-        type="name"
-        fullWidth
-        variant="standard"
-        value={image}
-        onChange={(event) => setImage(event.target.value)}
-      />
+
         <TextField
         autoFocus
         margin="dense"
@@ -134,9 +122,9 @@ const Edit  : React.FC<Props> = ({UpdateProduct ,  Editt , setOpenEdit }) => {
       <Button onClick={handleCloseEdit}>Cancel</Button>
       <Button
         onClick={() => {
-          UpdateProduct( Editt , productname  , parseInt (price)  , reference , image , status )
+          UpdateProduct( Editt , productname  , parseInt (price)  , reference , status )
           handleCloseEdit();
-          fetchData()
+          // fetchData()
         }}
       >
         Edit

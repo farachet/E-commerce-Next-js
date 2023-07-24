@@ -25,10 +25,11 @@ type Props = {
 
 HandleEdit : (a:number) => void
 setOpenEdit : (a:boolean) => void
+products:Product[]
 
 }
-const Products: React.FC<Props>= ({ HandleEdit , setOpenEdit})  =>  {
-  const {user}=useContext(ecommerceContext)
+const Products: React.FC<Props>= ({ HandleEdit , setOpenEdit,products})  =>  {
+  const {user,handleAddProduct}=useContext(ecommerceContext)
   console.log("currrentUser",user)
     const [data, setData] = useState<Product[]>([]);
     const [openn, setOpenn] = React.useState(false);
@@ -48,21 +49,9 @@ const Products: React.FC<Props>= ({ HandleEdit , setOpenEdit})  =>  {
     }
     
 
-    useEffect(() => {
-      fetch()
-    }, [])
+ 
 
-    const fetch = () => {
-        axios
-        .get(`http://localhost:3001/api/product/getAll/${user.id}`)
-          .then((res) => {
-            console.log(res.data)
-            setData(res.data)
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-      }
+
 
    
 
@@ -70,7 +59,7 @@ const Products: React.FC<Props>= ({ HandleEdit , setOpenEdit})  =>  {
       const deleteProduct = (id : number) => {
 axios.delete(`http://localhost:3001/api/product/deleteByid/${id}`)
 .then(() => {
-  fetch()
+  handleAddProduct()
 })
 .catch((err) => {
   console.log(err)
@@ -87,7 +76,7 @@ axios.delete(`http://localhost:3001/api/product/deleteByid/${id}`)
 
   return (
     <Box className={style.parent} >
-    {data.map((el) => (
+    {products.map((el) => (
       <Box
         key={el.id} 
         sx={{

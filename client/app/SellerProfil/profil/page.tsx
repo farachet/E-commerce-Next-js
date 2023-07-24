@@ -24,7 +24,7 @@ interface seller {
 }
 
 const Profil = () => {
-  const {user}=useContext(ecommerceContext)
+  const {user,handleRefreshContext}=useContext(ecommerceContext)
   console.log("currrentUser",user)
   const [open, setOpen] = React.useState(false);
   const [openPic, setOpenPic] = useState<boolean>(false);
@@ -38,7 +38,8 @@ const Profil = () => {
   const [coverPic , setCoverPic] = useState<string>("")
 
   // handle click on edit profil
-  const handleClickOpen = () => {
+  const handleClickOpenn = () => {
+    console.log("work")
     setOpen(true);
   };
 
@@ -55,35 +56,10 @@ const Profil = () => {
   };
 
 // handle click on cover profil
-const handleClickOpenCover = () => {
-  setOpenCover(true);
-};
 
-const handleCloseCover = () => {
-  setOpenCover(false);
-};
 
-  const fetch = () => {
-    axios
-      .get(`http://localhost:3001/api/seller/getOne/1`)
-      .then((res) => {
-        console.log(res.data);
-        setData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+ 
 
-  useEffect(() => {
-    fetch();
-
-    const CoverPic = localStorage.getItem("coverPic")
-    
-    if (CoverPic) {
-      setCoverPic(CoverPic)
-    }
-  }, []);
 
 
   //  update the informations of seller
@@ -93,14 +69,14 @@ const handleCloseCover = () => {
     email: string
   ) => {
     axios
-      .put(`http://localhost:3001/api/seller/Update/1`, {
+      .put(`http://localhost:3001/api/seller/Update/${user.id}`, {
         firstName: firstName,
         lastName: lastName,
         email: email,
       })
       .then((res) => {
-        console.log(res);
-        fetch();
+        handleRefreshContext()
+      
       })
       .then((err) => {
         console.log(err);
@@ -127,14 +103,15 @@ const handleCloseCover = () => {
   }
 
   const UpdateImage = () => {
-    axios.put("http://localhost:3001/api/seller/UpdateImage/1", {
+    axios.put(`http://localhost:3001/api/seller/UpdateImage/${user.id}`, {
   
       image: imageUrl,
      
     })
       .then((res: any) => {
         console.log(res.data)
-        fetch();
+        handleRefreshContext()
+       
       })
       .catch(err => {
         console.log(err)
@@ -183,7 +160,7 @@ const handleCloseCover = () => {
       <Container className={style.Headercontainer}>
         <Box>
           <Avatar
-            src={coverPic} 
+            src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_640.jpg" 
 
             sx={{
               width: "100%",
@@ -193,7 +170,7 @@ const handleCloseCover = () => {
             }}
           />
           <Box className={style.iconcontainer}>
-            <ModeEditOutlineIcon style={{ color: "white" }} onClick={handleClickOpenCover} />
+            <ModeEditOutlineIcon style={{ color: "white" }}  />
           </Box>
 
         
@@ -240,10 +217,7 @@ const handleCloseCover = () => {
                       variant="h4"
                       sx={{ color: "white", width: "max-content"  }}
                     >
-                      {user.firstName} {user.lastName}  <Avatar
-                src="https://cdn-icons-png.flaticon.com/128/6520/6520110.png"
-                style={{ width: 20, height: 20 , marginLeft : 175  , marginTop : -30}}
-              ></Avatar>
+                      {user.firstName} {user.lastName}  
                     </Typography>
                     
                     
@@ -267,6 +241,7 @@ const handleCloseCover = () => {
       
 
           <Button
+          onClick={handleClickOpenn}
             className={style.editbtn}
             sx={{
               position: "absolute",
@@ -278,7 +253,7 @@ const handleCloseCover = () => {
               borderRadius: "15px",
             }}
           >
-            <ModeEditOutlineIcon onClick={handleClickOpen} /> Edit Profile{" "}
+            <ModeEditOutlineIcon  /> Edit Profile{" "}
           </Button>
         </Box>
 
@@ -393,51 +368,9 @@ const handleCloseCover = () => {
           </Dialog>
         </Box>
 
-        {/* change cover pic  */}
+       
 
-        <Box>
-          <Dialog open={openCover} onClose={handleCloseCover}>
-            <DialogTitle>Edit Image Profil</DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                onChange={handleFileChangeCover}
-                id="name"
-                label="choose cover image"
-                type="file"
-               
-                variant="standard"
-              />
-                <Button
-              onClick={() => { uploadCover() }}
-              variant="contained"
-              style={{
-              width : 50 , 
-              height : 30 ,
-              right:"20px",
-              bottom:"27%",
-              backgroundColor:"#6C5DD3",
-              color:"white",
-              padding:"10px",
-              borderRadius:"15px",
-               marginTop: '8px'  ,
-               marginLeft : 20
-            }}
-            >
-              Upload
-            </Button>
-              
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleCloseCover}>Cancel</Button>
-              <Button onClick={() => {
-              
-                handleCloseCover()
-              }
-                }>Edit</Button>
-            </DialogActions>
-          </Dialog>
-        </Box>
+      
 
       </Container>
     </Box>

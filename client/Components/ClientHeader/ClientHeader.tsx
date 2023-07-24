@@ -26,7 +26,6 @@ const ClientHeader: React.FC<Props> = ({ user, handleRefresh }) => {
   const [profileData, setProfileData] = useState<Edit>({
     firstName: "",
     lastName: "",
-
     birthday: "",
   });
 
