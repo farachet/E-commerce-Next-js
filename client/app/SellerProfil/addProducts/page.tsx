@@ -26,10 +26,12 @@ const AddProducts: React.FC = () => {
   const [approved, setApproved] = useState(0)
   const [file, setFile] = useState<File | null>(null)
   const [categoryId , setCategoryId] = useState<number>(0)
+  const [allCat,setAllCat]=useState<category[]>([])
 
 
   useEffect(() => {
     fetch()
+    getCategories()
   },  [])
 
  
@@ -44,6 +46,11 @@ const fetch = () => {
       .catch((err) => {
         console.log(err)
       })
+  }
+  const getCategories=()=>{
+    axios.get(`http://localhost:3001/api/admin/allcategories`)
+    .then(res=>setAllCat(res.data))
+    .catch(err=>console.log(err))
   }
 
 
@@ -107,6 +114,41 @@ const fetch = () => {
         >
     
           <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <FormControl 
+            className='select-form'
+            fullWidth 
+            variant="standard"
+            
+            sx={{
+                borderBottom:"0.5px solid rgba(255, 255, 255, 0.5)",
+                boxSizing:"border-box",
+                marginTop:"20px"
+              
+                
+            }}>
+                      <InputLabel
+                        id="demo-simple-select-label"
+                        sx={{ color: '#FFF !important',
+                        padding:"0px 59px",fontWeight:"bold",fontSize:"20px" }}
+                      >
+                        Categories
+                      </InputLabel>
+            <Select
+              
+              
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              sx={{
+                color: 'white',boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 }
+  
+              }}
+            >
+                <MenuItem value={0}>all Category</MenuItem>
+                <MenuItem value={1}>sbabet 1</MenuItem>
+                <MenuItem value={2}>black</MenuItem>
+                <MenuItem value={3}>white</MenuItem>
+           </Select>
+    </FormControl>
             <TextField
               value={productname}
               onChange={(event) => setProductname(event.target.value)}

@@ -84,10 +84,15 @@ useEffect(() => {
   const handleFilterCategory=(query:number)=>{
     axios.get<Products[]>(`http://localhost:3001/api/product/getAllProducts`)
     .then((res)=>{
-      console.log("query",query)
-      const updatedProducts=res.data.filter(ele=>ele.category.id===query)
-      console.log("filltred") 
-      setProducts(updatedProducts) 
+      if(query===0){
+        const allCategories=res.data.filter(ele=>ele.status==="active")
+        setProducts(allCategories)
+      }else{
+        const updatedProducts=res.data.filter(ele=>ele.categoryId===query&&ele.status==="active")
+        console.log("filltred", updatedProducts) 
+        setProducts(updatedProducts) 
+      }
+     
 
     })
     .catch((err)=>{

@@ -171,11 +171,11 @@ deleteProduct(el.id)
 
 
           </Box>
-          <IconButton aria-label="delete">
-            <DeleteIcon onClick={() => {
+          <IconButton onClick={() => {
               handleClickOpen()
               
-              }}/>
+              }} aria-label="delete">
+            <DeleteIcon />
           </IconButton>
         </Box>
         {playSound && (
