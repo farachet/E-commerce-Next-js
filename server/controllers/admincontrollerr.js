@@ -7,8 +7,7 @@ module.exports = {
   //Users
   //GetAll
   getAllSellers(req, res) {
-    
-console.log("hello")
+    console.log("hello");
     seller
       .findAll()
       .then((sellers) => {
@@ -65,12 +64,10 @@ console.log("hello")
       });
   },
   deleteProduct(req, res) {
-    
-    const {id} = req.params;
-    console.log("fffffff",id)
+    const { id } = req.params;
+    console.log("fffffff", id);
 
-    Products
-      .destroy({ where: { id:id } })
+    Products.destroy({ where: { id: id } })
       .then((rowsDeleted) => {
         if (rowsDeleted === 0) {
           return res.status(404).json({ error: `product not found` });
@@ -81,8 +78,7 @@ console.log("hello")
         console.error(error);
         res.status(500).json({ error: `Failed to delete product` });
       });
-    },
-
+  },
 
   getAllProducts(req, res) {
     Products.findAll({})
@@ -97,8 +93,8 @@ console.log("hello")
   getAllProds(req, res) {
     Products.findAll({
       where: {
-        approved: 0
-      }
+        approved: 0,
+      },
     })
       .then((products) => {
         res.status(200).json(products);
@@ -109,11 +105,9 @@ console.log("hello")
       });
   },
   updateProds(req, res) {
+    const id = req.params.id;
 
-    const id= req.params.id;
-
-    Products
-      .update({ approved:1}, { where: { id: id } })
+    Products.update({ approved: 1 }, { where: { id: id } })
       .then(() => {
         res.sendStatus(200);
       })
@@ -171,10 +165,11 @@ console.log("hello")
   },
   //add categories
   addCategories(req, res) {
-    const { categoryname } = req.body;
+    const { categoryname, image } = req.body;
     category
       .create({
         categoryname,
+        image,
       })
       .then((categorie) => {
         res.status(201).json(categorie);
@@ -214,6 +209,18 @@ console.log("hello")
       .catch((error) => {
         console.error(error);
         res.status(500).json({ error: `Failed to delete category` });
+      });
+  },
+  // get products where categories id
+  getAllProd(req, res) {
+    const categoryId = req.params;
+    Products.findAll({ where: { categoryId: categoryId } })
+      .then((products) => {
+        res.status(200).json(products);
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).json({ error: "Failed to get products by category" });
       });
   },
 };

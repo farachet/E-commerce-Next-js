@@ -10,6 +10,8 @@ import {
   // Snackbar,
 } from "@mui/material"; // Import Snackbar from MUI
 import axios from "axios";
+import  { useRouter } from 'next/navigation';
+
 
 type LoginProps = {
   setLogin: (loginType: string) => void;
@@ -21,12 +23,14 @@ function Login({ setLogin }: LoginProps) {
   const [password, setPassword] = useState<string>("");
   const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
 
+  const router=useRouter()
+
   function validateForm(): boolean {
     return email.length > 0 && password.length > 0;
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>): void {
-    event.preventDefault();
+  function handleSubmit() {
+   console.log('zzzzz')
 
     if (validateForm()) {
       console.log("Form submitted successfully");
@@ -39,10 +43,17 @@ function Login({ setLogin }: LoginProps) {
         username: email,
         password: password,
       })
-      .then((res) => setLogin("client"))
-      .catch((err) => console.error(err));
+      .then((res) => {
+       
+        navigateToAdmin();
+      })   
+        .catch((err) => console.error(err));
   }
-
+  const navigateToAdmin = () => {
+    console.log('aaaa');
+    
+    router.push ('/Admin');
+  };
   // alert
 
   function handleGeneratePwd(): void {
@@ -88,7 +99,7 @@ function Login({ setLogin }: LoginProps) {
             width: 490,
             height: 600,
             left: 699,
-            top: 457,
+            top: 200,
             position: "absolute",
             background: "rgba(255, 255, 255, 0.10)",
             boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.15)",
@@ -96,6 +107,7 @@ function Login({ setLogin }: LoginProps) {
           }}
         >
           <Typography
+          
             variant="h1"
             component="h2"
             style={{
@@ -279,7 +291,7 @@ function Login({ setLogin }: LoginProps) {
                   }}
                 >
                   <Button
-                    onClick={handleGeneratePwd}
+                    onClick={handleSubmit}
                     style={{
                       color: "white",
                       fontSize: 14,
