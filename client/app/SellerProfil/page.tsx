@@ -10,7 +10,7 @@ import axios  from 'axios';
 
 const profilSeller  : React.FC = () => {
  
-  const [products, setProducts] = useState([]);
+ 
   const [Editt , setEditt] = useState<number>(0)
   const [openEdit, setOpenEdit] = React.useState(false);
 
@@ -40,7 +40,6 @@ const HandleEdit = (n : number) => {
     })
     .then((res) => {
      console.log(res.data)
-     fetchData()
     })
     .catch((err) => {
 console.log(err)

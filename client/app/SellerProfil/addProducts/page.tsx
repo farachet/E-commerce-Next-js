@@ -16,7 +16,9 @@ interface Product {
 }
 
 const AddProducts: React.FC = () => {
+
   const {user}=useContext(ecommerceContext)
+  console.log("users",user)
   const [productname, setProductname] = useState("")
   const [data , setData] = useState<Product[]>([])
   const [price, setPrice] = useState("");

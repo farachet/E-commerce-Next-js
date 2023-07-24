@@ -15,6 +15,7 @@ export const ecommerceContext = createContext<ecommerceProps>({
 const EcommerceContextProvider = (props:any) => {
     const [user,setCurrentUser]=useState({})
     const [refresh,setRefresh]=useState<boolean>(false)
+    const [products,setProducts]=useState<Product[]>([])
     useEffect(()=>{
         const token=localStorage.getItem("token")
         axios.post(`http://localhost:3001/api/user`,{"token":token})
@@ -29,6 +30,20 @@ const EcommerceContextProvider = (props:any) => {
         
         .catch(err=>console.log("errrr",err))
       },[refresh])
+      
+    const fetch = () => {
+      console.log("user from fetech",user.id)
+        axios
+        .get(`http://localhost:3001/api/product/getAll/${user.id}`)
+          .then((res) => {
+            console.log("fetched ",res.data)
+            console.log(res.data)
+            setProducts(res.data)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
 
       const handleRefreshContext=()=>{
         setRefresh(!refresh)
@@ -39,7 +54,9 @@ const EcommerceContextProvider = (props:any) => {
     const contextValue={
       user,
       handleRefreshContext,
-      handleLogoutUser
+      handleLogoutUser,
+      fetch,
+      products
     
     }
     return (
